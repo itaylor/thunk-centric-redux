@@ -1,0 +1,38 @@
+{
+  "name": "redux-action-router",
+  "version": "0.0.1",
+  "description": "A redux middleware that implements a simple, bidirectional mapping between url routes and actions.",
+  "main": "dist/index.js",
+  "repository": "github:itaylor/redux-action-router",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -r qunit-mocha-ui --ui qunit-mocha-ui --compilers js:babel/register"
+  },
+  "keywords": [
+    "redux",
+    "middleware",
+    "action",
+    "route",
+    "routing"
+  ],
+  "author": "ian.b.taylor@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.3.0",
+    "jsdom": "^7.0.2",
+    "mocha": "^2.3.3",
+    "qunit-mocha-ui": "0.0.5",
+    "redux": "^3.0.3",
+    "redux-thunk": "^1.0.0"
+  },
+  "dependencies": {
+    "addressbar": "^0.4.2",
+    "next-tick": "^0.2.2",
+    "path-to-regexp": "^1.2.1",
+    "url-mapper": "^0.3.2"
+  }
+}
