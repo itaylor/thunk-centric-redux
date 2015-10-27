@@ -53,7 +53,7 @@ function router(routes) {
     });
 
     (0, _nextTick2['default'])(function () {
-      (0, _urlMapper2['default'])(hashOnly(window.location.href, urlDispatchMap));
+      (0, _urlMapper2['default'])(hashOnly(window.location.href), urlDispatchMap);
     });
 
     return function (next) {

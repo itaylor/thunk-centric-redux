@@ -32,7 +32,7 @@ export default function router(routes, options={'hash':true}){
     });
 
     nextTick(()=>{
-      urlMapper(hashOnly(window.location.href, urlDispatchMap));
+      urlMapper(hashOnly(window.location.href), urlDispatchMap);
     });
 
     return next => action => {
