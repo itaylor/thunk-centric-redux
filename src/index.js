@@ -17,7 +17,7 @@ export default function router(routes, options={'hash':true}){
     Object.keys(action).forEach((actionProp) => {
       newHash = newHash.replace(':'+actionProp, ''+action[actionProp]);
     });
-    const newValue = urlChangeSupport.value.replace(/\#.*/, '') + '#' + newHash;
+    const newValue = removeHash(urlChangeSupport.value) + '#' + newHash;
     urlChangeSupport.value = newValue;
     return newValue;
   }
@@ -27,14 +27,13 @@ export default function router(routes, options={'hash':true}){
     actionUrlMap = actionTypesToUrlFunctions(routes, changeUrl);
 
     urlChangeSupport.on('change', (url) => {
-      url = url.replace(/.*?\#/, '');
+      url = hashOnly(url);
       urlMapper(url, urlDispatchMap);
     });
 
-    let href = window.location.href;
     nextTick(()=>{
-      urlMapper(href, urlDispatchMap);
-    })
+      urlMapper(hashOnly(window.location.href, urlDispatchMap));
+    });
 
     return next => action => {
       //Run the action, then change the URL if we had one that matched.
@@ -70,4 +69,12 @@ function actionTypesToUrlFunctions(routes, changeFn){
     actionTypeFns[val] = changeFn.bind(null, key);
   });
   return actionTypeFns;
+}
+
+function hashOnly(url){
+  return url.replace(/.*?\#/, '');
+}
+
+function removeHash(url){
+  return url.replace(/\#.*/, '')
 }

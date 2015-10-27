@@ -38,7 +38,7 @@ function router(routes) {
     Object.keys(action).forEach(function (actionProp) {
       newHash = newHash.replace(':' + actionProp, '' + action[actionProp]);
     });
-    var newValue = urlChangeSupport.value.replace(/\#.*/, '') + '#' + newHash;
+    var newValue = removeHash(urlChangeSupport.value) + '#' + newHash;
     urlChangeSupport.value = newValue;
     return newValue;
   }
@@ -48,13 +48,12 @@ function router(routes) {
     actionUrlMap = actionTypesToUrlFunctions(routes, changeUrl);
 
     urlChangeSupport.on('change', function (url) {
-      url = url.replace(/.*?\#/, '');
+      url = hashOnly(url);
       (0, _urlMapper2['default'])(url, urlDispatchMap);
     });
 
-    var href = window.location.href;
     (0, _nextTick2['default'])(function () {
-      (0, _urlMapper2['default'])(href, urlDispatchMap);
+      (0, _urlMapper2['default'])(hashOnly(window.location.href, urlDispatchMap));
     });
 
     return function (next) {
@@ -95,5 +94,13 @@ function actionTypesToUrlFunctions(routes, changeFn) {
     actionTypeFns[val] = changeFn.bind(null, key);
   });
   return actionTypeFns;
+}
+
+function hashOnly(url) {
+  return url.replace(/.*?\#/, '');
+}
+
+function removeHash(url) {
+  return url.replace(/\#.*/, '');
 }
 module.exports = exports['default'];

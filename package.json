@@ -1,6 +1,6 @@
 {
   "name": "redux-action-router",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A redux middleware that implements a simple, bidirectional mapping between url routes and actions.",
   "main": "dist/index.js",
   "repository": "github:itaylor/redux-action-router",
@@ -30,7 +30,6 @@
     "redux-thunk": "^1.0.0"
   },
   "dependencies": {
-    "addressbar": "^0.4.2",
     "next-tick": "^0.2.2",
     "path-to-regexp": "^1.2.1",
     "url-mapper": "^0.3.2"
