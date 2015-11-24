@@ -27,8 +27,9 @@ export default function router(routes, options={'hash':true}){
         return;
       }
       url = hashOnly(url);
-      const {route, match, values} = mapper.map(url, urlActionMap);
-      if(match){
+      const matched = mapper.map(url, urlActionMap);
+      if(matched){
+        const {route, match, values} = matched;
         const newAction = Object.assign({}, values || {}, {type:match});
         store.dispatch(newAction);
       }

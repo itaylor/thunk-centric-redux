@@ -48,14 +48,12 @@ function router(routes) {
         return;
       }
       url = hashOnly(url);
+      var matched = mapper.map(url, urlActionMap);
+      if (matched) {
+        var route = matched.route;
+        var match = matched.match;
+        var values = matched.values;
 
-      var _mapper$map = mapper.map(url, urlActionMap);
-
-      var route = _mapper$map.route;
-      var match = _mapper$map.match;
-      var values = _mapper$map.values;
-
-      if (match) {
         var newAction = Object.assign({}, values || {}, { type: match });
         store.dispatch(newAction);
       }
