@@ -24,7 +24,7 @@ var _nextTick2 = _interopRequireDefault(_nextTick);
 function router(routes) {
   var options = arguments.length <= 1 || arguments[1] === undefined ? { 'hash': true } : arguments[1];
 
-  var urlDispatchMap = undefined,
+  var urlActionMap = undefined,
       actionUrlMap = undefined,
       urlChangeSupport = undefined;
   if (options.hash) {
@@ -33,27 +33,38 @@ function router(routes) {
     throw new Error('Only hashchangeSupport available presently');
   }
 
-  function changeUrl(key, action) {
-    var newHash = key;
-    Object.keys(action).forEach(function (actionProp) {
-      newHash = newHash.replace(':' + actionProp, '' + action[actionProp]);
-    });
-    var newValue = removeHash(urlChangeSupport.value) + '#' + newHash;
-    urlChangeSupport.value = newValue;
-    return newValue;
-  }
+  var mapper = (0, _urlMapper2['default'])({});
+
+  urlActionMap = routes;
+  actionUrlMap = {};
+  Object.keys(routes).forEach(function (url) {
+    actionUrlMap[routes[url]] = url;
+  });
 
   var middleware = function middleware(store) {
-    urlDispatchMap = routeActionsToRouteFunctions(routes, store);
-    actionUrlMap = actionTypesToUrlFunctions(routes, changeUrl);
 
-    urlChangeSupport.on('change', function (url) {
+    function onChange(url) {
+      if (!url) {
+        return;
+      }
       url = hashOnly(url);
-      (0, _urlMapper2['default'])(url, urlDispatchMap);
-    });
+
+      var _mapper$map = mapper.map(url, urlActionMap);
+
+      var route = _mapper$map.route;
+      var match = _mapper$map.match;
+      var values = _mapper$map.values;
+
+      if (match) {
+        var newAction = Object.assign({}, values || {}, { type: match });
+        store.dispatch(newAction);
+      }
+    }
+
+    urlChangeSupport.on('change', onChange);
 
     (0, _nextTick2['default'])(function () {
-      (0, _urlMapper2['default'])(hashOnly(window.location.href), urlDispatchMap);
+      onChange(window.location.href);
     });
 
     return function (next) {
@@ -61,9 +72,11 @@ function router(routes) {
         //Run the action, then change the URL if we had one that matched.
         var result = next(action);
         if (action.type) {
-          var urlChangeFn = actionUrlMap[action.type];
-          if (urlChangeFn) {
-            urlChangeFn(action);
+          var matchedUrl = actionUrlMap[action.type];
+          if (matchedUrl) {
+            var newHash = mapper.stringify(matchedUrl, action);
+            var newUrlValue = removeHash(urlChangeSupport.value) + '#' + newHash;
+            urlChangeSupport.value = newUrlValue;
           }
         }
         return result;
@@ -71,29 +84,6 @@ function router(routes) {
     };
   };
   return middleware;
-}
-
-function routeActionsToRouteFunctions(routes, store) {
-  var routeFns = {};
-  Object.keys(routes).forEach(function (key) {
-    var actionType = routes[key];
-    routeFns[key] = function (_ref) {
-      var params = _ref.params;
-
-      params.type = actionType;
-      store.dispatch(params);
-    };
-  });
-  return routeFns;
-}
-
-function actionTypesToUrlFunctions(routes, changeFn) {
-  var actionTypeFns = {};
-  Object.keys(routes).forEach(function (key) {
-    var val = routes[key];
-    actionTypeFns[val] = changeFn.bind(null, key);
-  });
-  return actionTypeFns;
 }
 
 function hashOnly(url) {
