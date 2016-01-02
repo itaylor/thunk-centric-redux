@@ -3,6 +3,9 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports['default'] = router;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -19,10 +22,14 @@ var _nextTick = require('next-tick');
 
 var _nextTick2 = _interopRequireDefault(_nextTick);
 
-//A function that creates a middleware that functions as a "router" that maps urls to actions
+//A function that creates a middleware that functions as a "router" that maps urls to actions or actionCreators
 
-function router(routes) {
-  var options = arguments.length <= 1 || arguments[1] === undefined ? { 'hash': true } : arguments[1];
+function router(routes, opts) {
+  var options = _extends({
+    hash: true,
+    urlChangeActionType: 'urlChange',
+    urlChangeActionProperty: 'url'
+  }, opts);
 
   var urlActionMap = undefined,
       actionUrlMap = undefined,
@@ -47,18 +54,21 @@ function router(routes) {
       if (!url) {
         return;
       }
-      url = hashOnly(url);
       var matched = mapper.map(url, urlActionMap);
       if (matched) {
         var route = matched.route;
         var match = matched.match;
         var values = matched.values;
 
-        var newAction = Object.assign({}, values || {}, { type: match });
-        store.dispatch(newAction);
+        if (typeof match === 'function') {
+          var actionCreatorResult = match(values);
+          store.dispatch(actionCreatorResult);
+        } else {
+          store.dispatch(_extends({}, values, { type: match }));
+        }
       }
     }
-
+    urlChangeSupport.removeAllListeners('change');
     urlChangeSupport.on('change', onChange);
 
     (0, _nextTick2['default'])(function () {
@@ -70,25 +80,22 @@ function router(routes) {
         //Run the action, then change the URL if we had one that matched.
         var result = next(action);
         if (action.type) {
-          var matchedUrl = actionUrlMap[action.type];
-          if (matchedUrl) {
-            var newHash = mapper.stringify(matchedUrl, action);
-            var newUrlValue = removeHash(urlChangeSupport.value) + '#' + newHash;
-            urlChangeSupport.value = newUrlValue;
+          if (action.type === options.urlChangeActionType) {
+            urlChangeSupport.value = action[options.urlChangeActionProperty];
+          } else {
+            var matchedUrl = actionUrlMap[action.type];
+            if (matchedUrl) {
+              var newHash = mapper.stringify(matchedUrl, action);
+              urlChangeSupport.value = newHash;
+            }
           }
         }
         return result;
       };
     };
   };
+
   return middleware;
 }
 
-function hashOnly(url) {
-  return url.replace(/.*?\#/, '');
-}
-
-function removeHash(url) {
-  return url.replace(/\#.*/, '');
-}
 module.exports = exports['default'];

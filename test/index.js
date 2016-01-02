@@ -3,12 +3,18 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createActionRouterMiddleware from '../dist/index.js';
 
-const routerMiddleware = createActionRouterMiddleware({
+const routes = {
   '/foo/:payload': 'action3',
   '/foo/bar/:payload': 'action1',
   '/foo' : 'action2',
-  '/biff/:payload/:var1/:var2': 'action4'
-});
+  '/biff/:payload/:var1/:var2': 'action4',
+  '/thunk/:var1/:var2': ({var1, var2}) => dispatch => {
+    dispatch({type:'action5', var1, var2});
+  }
+
+};
+
+const routerMiddleware = createActionRouterMiddleware(routes);
 
 suite('Action router tests');
 
@@ -75,7 +81,39 @@ test('Multiple variables go into the url when dispatched from action', 1, (done)
   },0);
 });
 
+test('Mapping a route to an action creator that returns a thunk', 2, (done) => {
+  const createStoreWithWhateverMiddleware = applyMiddleware(thunkMiddleware, routerMiddleware)(createStore);
+  const store = createStoreWithWhateverMiddleware(simpleReducer);
 
+  window.location.href='#/thunk/myvar1/myvar2';
+  setTimeout(()=>{
+    equal(store.getState().action5.var1, 'myvar1');
+    equal(store.getState().action5.var2, 'myvar2');
+    done();
+  }, 0);
+});
+
+test('using urlChange action to explicitly change url without triggering re-evaluation of routes', 2, function (done){
+  const createStoreWithWhateverMiddleware = applyMiddleware(thunkMiddleware, routerMiddleware)(createStore);
+  const store = createStoreWithWhateverMiddleware(simpleReducer);
+  store.dispatch({type:'urlChange', url:'/foo/urlchange'});
+  equal(window.location.hash, '#/foo/urlchange');
+  strictEqual(store.getState().action1, undefined);
+  done();
+});
+
+test('Overriding urlChangeActionType and urlChangeActionProperty', 2, function (done){
+  let optsRouterMiddleware = createActionRouterMiddleware(routes, {
+    urlChangeActionType:'changed_url',
+    urlChangeActionProperty:'new_url'
+  });
+  const createStoreWithWhateverMiddleware = applyMiddleware(thunkMiddleware, optsRouterMiddleware)(createStore);
+  const store = createStoreWithWhateverMiddleware(simpleReducer);
+  store.dispatch({type:'changed_url', new_url:'/foo/changed_url'});
+  equal(window.location.hash, '#/foo/changed_url');
+  strictEqual(store.getState().action1, undefined);
+  done();
+});
 
 function simpleReducer(state={}, action){
   switch(action.type){
@@ -91,7 +129,7 @@ function simpleReducer(state={}, action){
       return Object.assign({}, state, {
         'action3': action.payload || 'action3'
       });
-    case 'action4':{
+    case 'action4':
       return Object.assign({}, state, {
         'action4': {
           payload:action.payload,
@@ -99,7 +137,13 @@ function simpleReducer(state={}, action){
           var2:action.var2
         }
       });
-    }
+    case 'action5':
+      return Object.assign({}, state, {
+        'action5': {
+          var1:action.var1,
+          var2:action.var2
+        }
+      });
     default:
       return state;
   }

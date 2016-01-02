@@ -1,5 +1,36 @@
 # redux-action-router
-A super simple router middleware for redux that maps urls to actions.  Use actions to trigger url changes and use url changes to trigger actions.
+A super simple router middleware for redux that maps routes to actions or action creators.
+
+## What it does
+
+The simplest way to use this is as a bidirectional mapping between url routes and redux action types.
+```
+{
+  '/myRoute/:id' : 'showMyRoute',
+  '/some/other/route/:param' : 'showSomeOtherRoute'
+}
+```
+When used with a route description like the above, when the url changes to include `#/myRoute/1`, it will dispatch a redux action `{type:'showMyRoute', id:'1'}`.  Conversely, when an action `{type:'showMyRoute', id:'5'}` is dispatched it will change the url to `#/myRoute/5`.
+
+This allows you to take routing information out of your React components and deal with all url changes as if they were just Redux actions.
+
+## Using with action creators
+
+You can also use it with action creators to get more sophisticated with what happens when a route changes:
+```
+{
+  '/foo': () => {type:'fooAction', key:'someValue'},
+  '/route/:param1/:param2': ({param1, param2}) => dispatch =>
+    dispatch({type:'someAction', subject:param1});
+    dispatch({type:'anotherAction', subject:param2});
+  }
+}
+```
+In the above, we have a route `#/foo` that will use an action creator to dispatch an action with some hardcoded value, and a route `#/route/:param1/:param2` that uses an action creator to dispatch a thunk that dispatches two separate actions, each with one of the params from the route.  You can use this pattern with thunks to string together very complex orchestration logic that needs to occur on route change.
+
+## Explicitly changing the url from within a thunk.
+
+When you use an action creator like in the above example, you may find yourself wanting to change the url as part of a thunk that was not triggered by a url change.  You can either do this by just setting `location.hash`, or by dispatching an action of type `urlChange` with a property `url` to the route eg: `{type:'urlChange', url:'/some/url'}`.
 
 How to use
 -------------
@@ -32,13 +63,14 @@ store.dispatch({type:'selectThing', id:'5'});
 //As well as running an reducer cases that may be looking at action type 'selectThing'
 ```
 
-### Why this is awesome
-*  If you combine this with something like [redux-signals](https://www.npmjs.com/package/redux-signals) that makes actions chainable, you can create a very complete set of operations that occur on url changes, while keeping within the redux dispatch/reduce model.
-*  All url/route changes result in dispatched actions that you can see in redux devtools.
-*  No super complex routing libraries to learn to use, just map the routes to actions, the actions to reducers, and you're done.
+### Changes
+* 0.1.0 Adds support for dispatching action creators, `urlChange` actions.  
 
-### TODO / missing things
-*  Right now only hash based urls work, no pushState/popState/replaceState support yet.  It should be straightforward to add though.
+### Roadmap for 1.0
+* ~~Action creators~~
+* Update to Babel 6
+* Add support for pushState/popState/replaceState, right now only hash based urls work
+
 
 ### MIT License
 Copyright (c) 2015 Ian Taylor
