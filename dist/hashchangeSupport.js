@@ -6,11 +6,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var _events = require('events');
 
-var currentUrl = window.location.href;
+var currentUrl = undefined;
 var emitter = new _events.EventEmitter();
-
-window.removeEventListener('hashchange', onChange);
-window.addEventListener('hashchange', onChange);
 
 function onChange() {
   var newUrl = window.location.href;
@@ -25,10 +22,19 @@ Object.defineProperty(emitter, 'value', {
     return hashOnly(currentUrl);
   },
   set: function set(val) {
-    window.location.href = removeHash(currentUrl) + '#' + val;
+    window.location.href = removeHash(currentUrl) + '#' + hashOnly(val);
   }
 });
 
+reset();
+
+function reset() {
+  currentUrl = window.location.href;
+
+  window.removeEventListener('hashchange', onChange);
+  window.addEventListener('hashchange', onChange);
+}
+emitter.reset = reset;
 exports['default'] = emitter;
 
 function hashOnly(url) {

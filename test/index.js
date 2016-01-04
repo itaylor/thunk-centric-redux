@@ -10,8 +10,8 @@ const routes = {
   '/biff/:payload/:var1/:var2': 'action4',
   '/thunk/:var1/:var2': ({var1, var2}) => dispatch => {
     dispatch({type:'action5', var1, var2});
-  }
-
+  },
+  '/fireinitial/:var1': 'action6'
 };
 
 const routerMiddleware = createActionRouterMiddleware(routes);
@@ -115,6 +115,47 @@ test('Overriding urlChangeActionType and urlChangeActionProperty', 2, function (
   done();
 });
 
+test('fireInitial option true fires change for the current url', 1, function (done){
+  //Set href before creating the middleware.
+  window.location.hash = '/fireinitial/abc';
+  const routerMiddleware = createActionRouterMiddleware(routes, {
+    fireInitial:true
+  });
+  const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
+  const store = createStoreWithMiddleware(simpleReducer);
+  setTimeout(()=>{
+    equal(store.getState().action6.var1, 'abc');
+    done();
+  },0);
+});
+
+test('fireInitial option false doesnt fire change for the current url', 1, function (done){
+  //Set href before creating the middleware.
+  window.location.href='#/fireinitial/def';
+  const routerMiddleware = createActionRouterMiddleware(routes, {
+    fireInitial:false
+  });
+  const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
+  const store = createStoreWithMiddleware(simpleReducer);
+  setTimeout(()=>{
+    equal(store.getState().action6, undefined);
+    done();
+  },0);
+});
+
+test('fireInitial option defaults to false', 1, function (done){
+  //Set href before creating the middleware.
+  window.location.href='#/fireinitial/hij';
+  const routerMiddleware = createActionRouterMiddleware(routes);
+  const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
+  const store = createStoreWithMiddleware(simpleReducer);
+  setTimeout(()=>{
+    equal(store.getState().action6, undefined);
+    done();
+  },0);
+});
+
+
 function simpleReducer(state={}, action){
   switch(action.type){
     case 'action1':
@@ -143,6 +184,10 @@ function simpleReducer(state={}, action){
           var1:action.var1,
           var2:action.var2
         }
+      });
+    case 'action6':
+      return Object.assign({}, state, {
+        'action6': {var1: action.var1}
       });
     default:
       return state;

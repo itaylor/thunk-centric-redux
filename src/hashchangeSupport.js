@@ -1,10 +1,7 @@
 import { EventEmitter } from 'events';
 
-let currentUrl = window.location.href;
+let currentUrl;
 const emitter = new EventEmitter();
-
-window.removeEventListener('hashchange', onChange);
-window.addEventListener('hashchange', onChange);
 
 function onChange(){
   const newUrl = window.location.href;
@@ -19,10 +16,19 @@ Object.defineProperty(emitter, 'value', {
     return hashOnly(currentUrl);
   },
   set:(val)=>{
-    window.location.href = removeHash(currentUrl) + '#' + val;
+    window.location.href = removeHash(currentUrl) + '#' + hashOnly(val);
   }
 });
 
+reset();
+
+function reset(){
+  currentUrl = window.location.href;
+
+  window.removeEventListener('hashchange', onChange);
+  window.addEventListener('hashchange', onChange);
+}
+emitter.reset = reset;
 export default emitter;
 
 function hashOnly(url){

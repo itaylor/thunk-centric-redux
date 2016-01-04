@@ -6,6 +6,7 @@ import nextTick from 'next-tick';
 export default function router(routes, opts){
   let options = {
     hash:true,
+    fireInitial:false,
     urlChangeActionType:'urlChange',
     urlChangeActionProperty:'url',
     ...opts
@@ -18,7 +19,7 @@ export default function router(routes, opts){
   else{
     throw new Error('Only hashchangeSupport available presently');
   }
-
+  urlChangeSupport.reset();
   const mapper = urlMapper({});
 
   urlActionMap = routes;
@@ -47,9 +48,11 @@ export default function router(routes, opts){
     urlChangeSupport.removeAllListeners('change');
     urlChangeSupport.on('change', onChange);
 
-    nextTick(()=>{
-      onChange(window.location.href);
-    });
+    if(options.fireInitial){
+      nextTick(()=>{
+        onChange(urlChangeSupport.value);
+      });
+    }
 
     return next => action => {
       //Run the action, then change the URL if we had one that matched.

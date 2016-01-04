@@ -27,6 +27,7 @@ var _nextTick2 = _interopRequireDefault(_nextTick);
 function router(routes, opts) {
   var options = _extends({
     hash: true,
+    fireInitial: false,
     urlChangeActionType: 'urlChange',
     urlChangeActionProperty: 'url'
   }, opts);
@@ -39,7 +40,7 @@ function router(routes, opts) {
   } else {
     throw new Error('Only hashchangeSupport available presently');
   }
-
+  urlChangeSupport.reset();
   var mapper = (0, _urlMapper2['default'])({});
 
   urlActionMap = routes;
@@ -71,9 +72,11 @@ function router(routes, opts) {
     urlChangeSupport.removeAllListeners('change');
     urlChangeSupport.on('change', onChange);
 
-    (0, _nextTick2['default'])(function () {
-      onChange(window.location.href);
-    });
+    if (options.fireInitial) {
+      (0, _nextTick2['default'])(function () {
+        onChange(urlChangeSupport.value);
+      });
+    }
 
     return function (next) {
       return function (action) {
