@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha -r qunit-mocha-ui --ui qunit-mocha-ui --compilers js:babel/register"
+    "test": "mocha --ui tdd --compilers js:babel/register"
   },
   "keywords": [
     "redux",
@@ -22,6 +22,7 @@
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-cli": "^6.3.17",
+    "expect": "^1.13.4",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.3.0",
     "jsdom": "^7.0.2",

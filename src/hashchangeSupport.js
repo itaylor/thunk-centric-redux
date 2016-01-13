@@ -36,5 +36,5 @@ function hashOnly(url){
 }
 
 function removeHash(url){
-  return url.replace(/\#.*/, '')
+  return url.replace(/\#.*/, '');
 }

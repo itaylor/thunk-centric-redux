@@ -10,7 +10,7 @@ export default function router(routes, opts){
     urlChangeActionType:'urlChange',
     urlChangeActionProperty:'url',
     ...opts
-  }
+  };
 
   let urlActionMap, actionUrlMap, urlChangeSupport;
   if(options.hash){
@@ -69,8 +69,8 @@ export default function router(routes, opts){
         }
       }
       return result;
-    }
-  }
+    };
+  };
 
   return middleware;
 }
