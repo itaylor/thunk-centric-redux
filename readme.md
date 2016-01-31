@@ -1,16 +1,42 @@
 # redux-action-router
 A super simple router middleware for redux that maps routes to actions or action creators.
 
+How to use
+-------------
+### Installation
+```
+npm install --save redux-action-router
+```
+
+### Example usage
+This will create a middleware that maps two hash based urls to actions.
+```js
+import { createStore, applyMiddleware } from 'redux';
+import createRouterMiddleware from 'redux-action-router';
+import myRootReducer from './yourRootReducer.js';
+
+let routesToActions = {
+  '/thing/:id': 'selectThing'
+}
+
+let routerMiddleware = createRouterMiddleware(routesToActions);
+let store = applyMiddleware(routerMiddleware)(createStore)(myRootReducer);
+
+window.location.href = '#/thing/1?param=true';
+//This will dispatch an action:
+//{type:'selectThing', id:'1', param:'true' }
+```
+
 ## What it does
 
-The simplest way to use this is as a bidirectional mapping between url routes and redux action types.
+The simplest way to use this is as a mapping between url routes and redux action types.
 ```
 {
   '/myRoute/:id' : 'showMyRoute',
   '/some/other/route/:param' : 'showSomeOtherRoute'
 }
 ```
-When used with a route description like the above, when the url changes to include `#/myRoute/1`, it will dispatch a redux action `{type:'showMyRoute', id:'1'}`.  Conversely, when an action `{type:'showMyRoute', id:'5'}` is dispatched it will change the url to `#/myRoute/5`.
+When used with a route description like the above, when the url changes to include `#/myRoute/1`, it will dispatch a redux action `{type:'showMyRoute', id:'1'}`.
 
 This allows you to take routing information out of your React components and deal with all url changes as if they were just Redux actions.
 
@@ -28,47 +54,18 @@ You can also use it with action creators to get more sophisticated with what hap
 ```
 In the above, we have a route `#/foo` that will use an action creator to dispatch an action with some hardcoded value, and a route `#/route/:param1/:param2` that uses an action creator to dispatch a thunk that dispatches two separate actions, each with one of the params from the route.  You can use this pattern with thunks to string together very complex orchestration logic that needs to occur on route change.
 
-## Explicitly changing the url from within a thunk.
+## Changing the url by dispatching an action
 
-When you use an action creator like in the above example, you may find yourself wanting to change the url as part of a thunk that was not triggered by a url change.  You can either do this by just setting `location.hash`, or by dispatching an action of type `urlChange` with a property `url` to the route eg: `{type:'urlChange', url:'/some/url'}`.
-
-How to use
--------------
-### Installation
-```
-npm install --save redux-action-router
-```
-
-### Example usage
-This will create a middleware that maps two hash based urls to actions, and vise versa.
-```js
-import { createStore, applyMiddleware } from 'redux';
-import createRouterMiddleware from 'redux-action-router';
-import myRootReducer from './reducer.js';
-
-let routesToActions = {
-  '/foo/bar': 'showFooBar',
-  '/thing/:id': 'selectThing'
-}
-
-let routerMiddleware = createRouterMiddleware(routesToActions);
-let store = applyMiddleware(routerMiddleware)(createStore)(myRootReducer);
-
-window.location.href = '#/foo/bar';
-//This will dispatch an action:
-//{type:'showFooBar'}
-
-store.dispatch({type:'selectThing', id:'5'});
-//This will change the URL to #/thing/5
-//As well as running an reducer cases that may be looking at action type 'selectThing'
-```
+When you use an action creator like in the above example, you may find yourself wanting to change the url.  You can do this by dispatching an action of type `urlChange` with a property `url` to the route eg: `{type:'urlChange', url:'/some/url'}`.
 
 ### Changes
+* 0.2.0
+  Removes bi-directionality of route to url mapping. Previously, dispatching an action that was mapped to a route would automatically change the url.  In practice, this has proved to be not very useful so it is being removed.  
+  Adds support for query parameters.
+
 * 0.1.0 Adds support for dispatching action creators, `urlChange` actions.  
 
 ### Roadmap for 1.0
-* ~~Action creators~~
-* Update to Babel 6
 * Add support for pushState/popState/replaceState, right now only hash based urls work
 
 

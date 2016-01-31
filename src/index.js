@@ -1,6 +1,7 @@
 import urlMapper from 'url-mapper';
 import hashchangeSupport from './hashchangeSupport.js';
 import nextTick from 'next-tick';
+import querystring from 'querystring';
 
 //A function that creates a middleware that functions as a "router" that maps urls to actions or actionCreators
 export default function router(routes, opts){
@@ -12,7 +13,7 @@ export default function router(routes, opts){
     ...opts
   };
 
-  let urlActionMap, actionUrlMap, urlChangeSupport;
+  let urlActionMap, urlChangeSupport;
   if(options.hash){
     urlChangeSupport = hashchangeSupport;
   }
@@ -23,10 +24,6 @@ export default function router(routes, opts){
   const mapper = urlMapper({});
 
   urlActionMap = routes;
-  actionUrlMap = {};
-  Object.keys(routes).forEach((url) => {
-    actionUrlMap[routes[url]] = url;
-  });
 
   const middleware = (store) => {
 
@@ -34,11 +31,19 @@ export default function router(routes, opts){
       if(!url){
         return;
       }
-      const matched = mapper.map(url, urlActionMap);
+      const [path, query] = url.split('?');
+      const matched = mapper.map(path, urlActionMap);
       if(matched){
-        const {route, match, values} = matched;
+        let {route, match, values} = matched;
+        if(query){
+          const parsedQuery = querystring.parse(query);
+          values = {
+            ...parsedQuery,
+            ...values
+          };
+        }
         if(typeof match === 'function'){
-          let actionCreatorResult = match(values);
+          const actionCreatorResult = match(values);
           store.dispatch(actionCreatorResult);
         }else{
           store.dispatch({...values, type:match});
@@ -60,12 +65,6 @@ export default function router(routes, opts){
       if(action.type){
         if(action.type === options.urlChangeActionType){
           urlChangeSupport.value = action[options.urlChangeActionProperty];
-        }else{
-          const matchedUrl = actionUrlMap[action.type];
-          if(matchedUrl){
-            const newHash = mapper.stringify(matchedUrl, action);
-            urlChangeSupport.value = newHash;
-          }
         }
       }
       return result;

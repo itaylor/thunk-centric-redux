@@ -12,7 +12,9 @@ const routes = {
   '/thunk/:var1/:var2': ({var1, var2}) => dispatch => {
     dispatch({type:'action5', var1, var2});
   },
-  '/fireinitial/:var1': 'action6'
+  '/fireinitial/:var1': 'action6',
+  '/something/:payload': 'action7',
+  '/somethingElse/:payload': 'action8',
 };
 
 const routerMiddleware = createActionRouterMiddleware(routes);
@@ -28,19 +30,6 @@ suite('Action router tests', function (){
       expect(store.getState().action3).toBe('bar');
       expect(store.getState().action1).toBe(undefined);
       expect(store.getState().action2).toBe(undefined);
-      done();
-    },0);
-  });
-
-  test('Dispatching an action changes the URL', (done) => {
-    const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
-    const store = createStoreWithMiddleware(simpleReducer);
-    store.dispatch({type:'action3', payload:'blah'});
-
-    setTimeout(()=>{
-      expect(window.location.hash).toBe('#/foo/blah');
-      expect(store.getState().action2).toBe(undefined);
-      expect(store.getState().action1).toBe(undefined);
       done();
     },0);
   });
@@ -67,17 +56,6 @@ suite('Action router tests', function (){
       expect(store.getState().action4.payload).toBe('something');
       expect(store.getState().action4.var1).toBe('v1');
       expect(store.getState().action4.var2).toBe('v2');
-      done();
-    },0);
-  });
-
-  test('Multiple variables go into the url when dispatched from action', (done) => {
-    const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
-    const store = createStoreWithMiddleware(simpleReducer);
-    store.dispatch({type:'action4', payload:'awesome', var1:'thing1', var2:'thing2'});
-
-    setTimeout(()=>{
-      expect(window.location.hash).toBe('#/biff/awesome/thing1/thing2');
       done();
     },0);
   });
@@ -156,6 +134,41 @@ suite('Action router tests', function (){
     },0);
   });
 
+
+  test('Query parameters are passed', function (done){
+    const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
+    const store = createStoreWithMiddleware(simpleReducer);
+    window.location.href='#/something/bar?queryParam1=cool&queryParam2=awesome';
+
+    setTimeout(()=>{
+      expect(store.getState().action7).toBe('barcoolawesome');
+      done();
+    },0);
+  });
+
+  test('Path params trump query params', function (done){
+    const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
+    const store = createStoreWithMiddleware(simpleReducer);
+    //There is a path param 'payload' which takes precedence over the query param payload.
+    window.location.href='#/something/yes?queryParam1=1&queryParam2=2&payload=no';
+
+    setTimeout(()=>{
+      expect(store.getState().action7).toBe('yes12');
+      done();
+    },0);
+  });
+
+  test('Multiple of the same params treated as arrays', function (done){
+    const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
+    const store = createStoreWithMiddleware(simpleReducer);
+    //There is a path param 'payload' which takes precedence over the query param payload.
+    window.location.href='#/somethingElse/hey?multiQP=test%20poo%20%F0%9F%92%A9&multiQP=number%202';
+
+    setTimeout(()=>{
+      expect(store.getState().action8).toBe('heytest poo 💩number 2');
+      done();
+    },0);
+  });
 });
 
 
@@ -191,6 +204,14 @@ function simpleReducer(state={}, action){
     case 'action6':
       return Object.assign({}, state, {
         'action6': {var1: action.var1}
+      });
+    case 'action7':
+      return Object.assign({}, state, {
+        'action7': action.payload + action.queryParam1 + action.queryParam2
+      });
+    case 'action8':
+      return Object.assign({}, state, {
+        'action8': action.payload + action.multiQP[0] + action.multiQP[1]
       });
     default:
       return state;

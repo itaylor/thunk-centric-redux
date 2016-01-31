@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
@@ -35,7 +35,7 @@ function reset() {
   window.addEventListener('hashchange', onChange);
 }
 emitter.reset = reset;
-exports['default'] = emitter;
+exports.default = emitter;
 
 function hashOnly(url) {
   return url.replace(/.*?\#/, '');
@@ -44,4 +44,3 @@ function hashOnly(url) {
 function removeHash(url) {
   return url.replace(/\#.*/, '');
 }
-module.exports = exports['default'];
