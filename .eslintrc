@@ -1,0 +1,44 @@
+{
+  "env": {
+    "es6": true,
+  },
+  "globals": {
+    "describe": false,
+    "test": false,
+    "expect": false,
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+  },
+  "extends": "airbnb-base",
+  "rules": {
+    "import/no-unresolved": 0,
+    "import/no-duplicates": 0,
+    "import/extensions": 0,
+    "import/no-named-as-default-member": 0,
+    "import/first": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0,
+    "import/no-named-as-default": 0,
+    "new-cap": 0,
+    "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+    "no-param-reassign": 0,
+    "no-use-before-define": [0],
+    "no-plusplus": 0,
+    "no-bitwise": 0,
+    "max-len": 0,
+    "comma-dangle": ["error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never",
+    }],
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
+    "class-methods-use-this": 0,
+    "no-mixed-operators": 0,
+    "no-underscore-dangle": [0],
+    "no-prototype-builtins": 0,
+  }
+}
