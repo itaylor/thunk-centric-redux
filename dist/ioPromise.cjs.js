@@ -19,9 +19,13 @@ class IoPromiseError extends ExtendableError {
   }
 }
 
-function createIoPromise(socket, opts) {
-  const options = Object.assign({ eventName: 'request' }, opts);
+const IoPromiseError$1 = IoPromiseError;
 
+function createIoPromise(socket, opts) {
+  const options = {
+    eventName: 'request',
+    ...opts,
+  };
   return function ioPromise(request) {
     let resolve;
     let reject;
@@ -37,12 +41,12 @@ function createIoPromise(socket, opts) {
       if (response.type === request.type) {
         resolve(response);
       } else {
-        reject(new IoPromiseError({ request, response }));
+        reject(new IoPromiseError$1({ request, response }));
       }
     });
     return promise;
   };
 }
 
-exports.IoPromiseError = IoPromiseError;
+exports.IoPromiseError = IoPromiseError$1;
 exports.default = createIoPromise;

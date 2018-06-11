@@ -1,10 +1,12 @@
-import IoPromiseError from './IoPromiseError.js';
+import IoPromiseErrorCtor from './IoPromiseError.js';
 
-export { IoPromiseError };
+export const IoPromiseError = IoPromiseErrorCtor;
 
 export default function createIoPromise(socket, opts) {
-  const options = Object.assign({ eventName: 'request' }, opts);
-
+  const options = {
+    eventName: 'request',
+    ...opts,
+  };
   return function ioPromise(request) {
     let resolve;
     let reject;

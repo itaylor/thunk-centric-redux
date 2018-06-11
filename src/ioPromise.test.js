@@ -1,8 +1,7 @@
-const createIoPromise = require('../dist/ioPromise.cjs.js').default;
-const IoPromiseError = require('../dist/ioPromise.cjs.js').IoPromiseError;
-const MockSocket = require('../mocks/MockSocket.js');
+import createIoPromise, { IoPromiseError } from '../dist/ioPromise.esm.js';
+import MockSocket from './MockSocket.js';
 
-describe('ioMiddleware', () => {
+describe('ioPromise', () => {
   test('ioPromise resolves normally on received response', async () => {
     const mockSocket = new MockSocket();
     const ioPromise = createIoPromise(mockSocket);
@@ -45,6 +44,7 @@ describe('ioMiddleware', () => {
       expect(e).toMatchSnapshot();
     }
   });
+
 
   async function scheduleFakeResponse(mockSocket, responseAction) {
     await sleep();
