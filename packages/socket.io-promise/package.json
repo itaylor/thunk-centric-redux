@@ -1,0 +1,39 @@
+{
+  "name": "socket.io-promise",
+  "version": "1.0.0",
+  "description": "An opinionated Promise wrapper around socket.io's emit/ack",
+  "main": "dist/ioPromise.cjs.js",
+  "module": "dist/ioPromise.esm.js",
+  "repository": "https://github.com/itaylor/socket.io-promise.git",
+  "author": "Ian Taylor <ian.b.taylor@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "babel-jest": "^23.0.1",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "jest": "^23.1.0",
+    "rollup": "^0.60.1",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn run lint && node node_modules/.bin/rollup -c",
+    "dev": "node node_modules/.bin/rollup -c -w",
+    "test": "node node_modules/.bin/jest",
+    "lint": "./node_modules/.bin/eslint src --max-warnings 0",
+    "pretest": "yarn run build",
+    "coverage": "node node_modules/.bin/jest --coverage",
+    "precoverage": "yarn run build"
+  },
+  "dependencies": {
+    "es6-error": "^4.1.1"
+  }
+}
