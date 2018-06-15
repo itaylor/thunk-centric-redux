@@ -13,8 +13,8 @@ export default [
     external: ['url-mapper', 'querystring'],
     plugins: [
       babel({
-        exclude: 'node_modules/**'
-      })
+        exclude: 'node_modules/**',
+      }),
     ],
     output: [
       { file: pkg.main, format: 'cjs', exports: 'named' },
