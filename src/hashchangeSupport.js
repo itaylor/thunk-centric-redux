@@ -1,40 +1,55 @@
-import { EventEmitter } from 'events';
+/* global window */
+let skipNext = 0;
+export default function init(onChange) {
+  skipNext = 0;
+  window.addEventListener('hashchange', onHashChange);
+  window.addEventListener('click', onClick);
 
-let currentUrl;
-const emitter = new EventEmitter();
-
-function onChange(){
-  const newUrl = window.location.href;
-  if(currentUrl != newUrl){
-    currentUrl = newUrl;
-    emitter.emit('change',hashOnly(newUrl));
+  function onClick({ target }) {
+    if (target && target.getAttribute) {
+      const clickCurrentUrl = target.getAttribute('href') === window.location.hash;
+      if (clickCurrentUrl) {
+        processUrl();
+      }
+    }
   }
-}
 
-Object.defineProperty(emitter, 'value', {
-  get:()=>{
-    return hashOnly(currentUrl);
-  },
-  set:(val)=>{
-    window.location.href = removeHash(currentUrl) + '#' + hashOnly(val);
+  function onHashChange() {
+    if (skipNext) {
+      skipNext--;
+      return null;
+    }
+    return processUrl();
   }
-});
 
-reset();
+  function processUrl() {
+    return onChange(hashOnly(window.location.href));
+  }
 
-function reset(){
-  currentUrl = window.location.href;
+  function cleanUp() {
+    window.removeEventListener('hashchange', onHashChange);
+    window.removeEventListener('click', onClick);
+  }
 
-  window.removeEventListener('hashchange', onChange);
-  window.addEventListener('hashchange', onChange);
+  return {
+    setUrl(url) {
+      const loc = window.location.href;
+      const newUrl = `${removeHash(loc)}#${hashOnly(url)}`;
+      if (newUrl !== loc) {
+        skipNext++;
+        window.location.href = newUrl;
+      }
+    },
+    processUrl,
+    cleanUp,
+  };
 }
-emitter.reset = reset;
-export default emitter;
 
-function hashOnly(url){
-  return url.replace(/.*?\#/, '');
+
+export function hashOnly(url) {
+  return url.replace(/.*?#/, '');
 }
 
-function removeHash(url){
-  return url.replace(/\#.*/, '');
+function removeHash(url) {
+  return url.replace(/#.*/, '');
 }

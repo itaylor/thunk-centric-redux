@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Action router tests default dispatcher dispatches urlChange action before calling route action creator 1`] = `
+Array [
+  Array [
+    Object {},
+    Object {
+      "path": "/foo",
+      "type": "urlChange",
+      "values": Object {},
+    },
+  ],
+  Array [
+    Object {},
+    Object {
+      "type": "action2",
+    },
+  ],
+]
+`;

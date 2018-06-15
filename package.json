@@ -1,39 +1,50 @@
 {
   "name": "redux-action-router",
-  "version": "0.2.0",
-  "description": "A redux middleware that implements a simple, bidirectional mapping between url routes and actions or action creators.",
-  "main": "dist/index.js",
+  "version": "1.0.0",
+  "description": "A redux middleware that implements a simple, mapping between url routes and action creators.",
+  "main": "dist/reduxActionRouter.cjs.js",
+  "module": "dist/reduxActionRouter.esm.js",
   "repository": "github:itaylor/redux-action-router",
-  "directories": {
-    "test": "test"
-  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "mocha --ui tdd --compilers js:babel-register"
+    "build": "yarn run lint && node node_modules/.bin/rollup -c",
+    "dev": "node node_modules/.bin/rollup -c -w",
+    "test": "node node_modules/.bin/jest",
+    "lint": "./node_modules/.bin/eslint src --max-warnings 0",
+    "pretest": "yarn run build",
+    "coverage": "node node_modules/.bin/jest --coverage",
+    "precoverage": "yarn run build"
   },
   "keywords": [
     "redux",
     "middleware",
     "action",
     "route",
-    "routing"
+    "routing",
+    "thunk"
   ],
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.3.26",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-react": "^6.3.13",
-    "babel-preset-stage-1": "^6.3.13",
-    "expect": "^1.13.4",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.0.0",
-    "jsdom": "^7.0.2",
-    "mocha": "^2.3.3",
-    "redux": "^3.0.3",
-    "redux-thunk": "^1.0.0"
+    "babel-jest": "^23.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "jest": "^23.1.0",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "rollup": "^0.60.1",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.3"
   },
   "dependencies": {
-    "next-tick": "^0.2.2",
-    "url-mapper": "^0.5.2"
+    "url-mapper": "^2.0.0"
   }
 }

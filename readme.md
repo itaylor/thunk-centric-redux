@@ -1,5 +1,5 @@
 # redux-action-router
-A super simple router middleware for redux that maps routes to actions or action creators.
+A super simple router middleware for redux that maps routes to action creators.
 
 How to use
 -------------
@@ -9,17 +9,17 @@ npm install --save redux-action-router
 ```
 
 ### Example usage
-This will create a middleware that maps two hash based urls to actions.
+This will create a middleware that dispatches a redux action 'selectThing' whenever a route `/thing/:id` is visited.
 ```js
 import { createStore, applyMiddleware } from 'redux';
 import createRouterMiddleware from 'redux-action-router';
 import myRootReducer from './yourRootReducer.js';
 
-let routesToActions = {
-  '/thing/:id': 'selectThing'
+let routeMap = {
+  '/thing/:id': ({ id, param }) => ({ type: 'selectThing', id, param }),
 }
 
-let routerMiddleware = createRouterMiddleware(routesToActions);
+let routerMiddleware = createRouterMiddleware(routeMap);
 let store = applyMiddleware(routerMiddleware)(createStore)(myRootReducer);
 
 window.location.href = '#/thing/1?param=true';
@@ -27,20 +27,7 @@ window.location.href = '#/thing/1?param=true';
 //{type:'selectThing', id:'1', param:'true' }
 ```
 
-## What it does
-
-The simplest way to use this is as a mapping between url routes and redux action types.
-```
-{
-  '/myRoute/:id' : 'showMyRoute',
-  '/some/other/route/:param' : 'showSomeOtherRoute'
-}
-```
-When used with a route description like the above, when the url changes to include `#/myRoute/1`, it will dispatch a redux action `{type:'showMyRoute', id:'1'}`.
-
-This allows you to take routing information out of your React components and deal with all url changes as if they were just Redux actions.
-
-## Using with action creators
+## Using with action creators and thunks
 
 You can also use it with action creators to get more sophisticated with what happens when a route changes:
 ```
@@ -56,21 +43,50 @@ In the above, we have a route `#/foo` that will use an action creator to dispatc
 
 ## Changing the url by dispatching an action
 
-When you use an action creator like in the above example, you may find yourself wanting to change the url.  You can do this by dispatching an action of type `urlChange` with a property `url` to the route eg: `{type:'urlChange', url:'/some/url'}`.
+There are four ways to change the url:
+
+1. *Via link href*  This is the simplest.  You can just set the `href` of a link to `#/whatever` and that will be caught and handled when the link is clicked.
+2. *Via location properties*  You can set `location.hash='/whatever'`
+  You can also set `location.hash = /whatever`;
+3. *Via redux with routing* You can dispatch an action `{ type: 'setUrlRoute', url:'/whatever' }`.  This will set the url and then process any routing that may apply for the url, just like the three above options.
+3. *Via redux without routing* You can dispatch an action `{ type: 'setUrl', url:'/whatever' }`.   This will set the url, but will *NOT* process any routing.  This is useful mostly from within a thunk that is a route handler, as it allow you set the url to the correct value without re-processing the route.
+
+## Handling route changes
+Whenever the route changes through any of the above methods, a redux action `{ type: 'urlChange', url:'/the/url' }` is dispatched.  This happens *before* any route handler action creators are called.
 
 ### Changes
+* 1.0.0
+  Use rollup.js to build cjs/modules
+  Require use of action creators (no more `Map<String, String>` route objects)
+  Split `urlChange` action into three separate actions, `urlChange`, `setUrl`, `setUrlRoute`
+
 * 0.2.0
   Removes bi-directionality of route to url mapping. Previously, dispatching an action that was mapped to a route would automatically change the url.  In practice, this has proved to be not very useful so it is being removed.  
   Adds support for query parameters.
 
 * 0.1.0 Adds support for dispatching action creators, `urlChange` actions.  
 
-### Roadmap for 1.0
-* Add support for pushState/popState/replaceState, right now only hash based urls work
+### Why choose this over a more name brand router like react-router?
+
+First, you have to be ok with `location.hash` based routing, or help implement pushState/popState support (I'd love to add it, but don't have it as a use case of my own).
+
+My experience with react-router is that it's all about tying routing to React components.  It's my belief that when you have an app driven by a redux store, and the app has lots of data that must be loaded when routes change, that this tie of route->component is not optimal, and often unhelpful.  
+
+When routing is tied to components, that means the components must know how to load the data they depend on when they enter the DOM.  This makes doing things like batching data loads difficult, as components are supposed to be modular, but data-fetching may need to affect multiple components.  It can also lead to fetching the same data multiple times, or creating a lots of specialized 'data-fetching-only' components that don't really have presentational value, or creating components that chain-load, EG: component mounts, it renders a loading indicator and on `componentDidMount`, it fetches data, then when the data is fetched, it re-renders, this time loading a child component that in turn does the same thing and fetches data on `componentDidMount` for a different piece of set of data.
+
+If instead your app moves all data fetching to actionCreators/thunks, and these are responsible getting all the right data for the current route, then you can easily wait to mount components until after the data is loaded.  You can also chain all your thunks together, or dispatch actions that start animations while waiting for the data to load, or whatever.
+
+The below is a bit of a synopsis of how I think the common flows go in the different systems:
+| React Router | `Route -> Component Mounted -> Data Loading -> Redux State Update -> Component updated with new props` |
+| Action Router| `Route -> Thunk -> Data Loading -> Redux State Update -> Component Loaded` |
+
+In a large application, I find the bottom to be easier to work and reason about in large application with lots of data fetching.
+
+Nothing against React-router, it's a great routing framework with some great people who work on it.  I'd highly recommend it for any app that either doesn't have a redux-like state store or which doesn't have a need for complex data-loading scenarios.  I imagine react-router is probably the right choice for a react/redux app where the whole store is synced with the backend automatically and you can expect that the data that is in the store is always complete and correct and you have no need to manage details about how to fetch data.   In that case, the direct tie from route to component is a benefit.
 
 
 ### MIT License
-Copyright (c) 2015 Ian Taylor
+Copyright (c) 2015-2018 Ian Taylor
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
