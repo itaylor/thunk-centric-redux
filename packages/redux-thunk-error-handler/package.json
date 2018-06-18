@@ -1,0 +1,44 @@
+{
+  "name": "redux-thunk-error-handler",
+  "version": "1.0.0",
+  "description": "An error handler for thunks that, when used in conjunction with `redux-thunk-recursion-detect` can handle errors thrown in both async and sync thunks gracefully.",
+  "main": "dist/reduxThunkErrorHandler.cjs.js",
+  "module": "dist/reduxThunkErrorHandler.esm.js",
+  "repository": "github:itaylor/thunk-centric-redux",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node node_modules/.bin/rollup -c",
+    "dev": "node node_modules/.bin/rollup -c -w",
+    "test": "node node_modules/.bin/jest && yarn test:mocha",
+    "test:mocha": "NODE_ENV=test node node_modules/.bin/mocha --require babel-register --ui tdd src/*.mochaTest.js",
+    "pretest": "yarn run build",
+    "coverage": "node node_modules/.bin/jest --coverage",
+    "precoverage": "yarn run build"
+  },
+  "keywords": [
+    "redux",
+    "thunk",
+    "error",
+    "handler",
+    "catch",
+    "async",
+    "dispatch",
+    "exception",
+    "reject"
+  ],
+  "author": "ian.b.taylor@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-register": "6.26.0",
+    "expect": "^23.1.0",
+    "jest": "^23.1.0",
+    "mocha": "^5.2.0",
+    "redux": "^4.0.0",
+    "rollup": "^0.60.1"
+  },
+  "dependencies": {
+    "redux-thunk-recursion-detect": "^1.0.0"
+  }
+}

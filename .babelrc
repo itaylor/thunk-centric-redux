@@ -2,8 +2,11 @@
   "plugins": ["transform-object-rest-spread"],
   "env":{
     "test": {
-      "plugins": ["transform-object-rest-spread"],
-      "presets": ["env"]
+      "plugins": [
+        "transform-object-rest-spread", 
+        "transform-async-to-generator",
+        "transform-es2015-modules-commonjs"
+      ]
     }
   }
 }

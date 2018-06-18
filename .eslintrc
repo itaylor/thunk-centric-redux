@@ -4,10 +4,12 @@
   },
   "globals": {
     "describe": false,
+    "suite": false,
     "test": false,
     "expect": false,
     "jest": false,
     "afterEach": false,
+    "it": false,
   },
   "parserOptions": {
     "ecmaVersion": 2017,

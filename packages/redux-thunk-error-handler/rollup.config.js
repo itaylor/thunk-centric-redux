@@ -3,8 +3,8 @@ import babel from 'rollup-plugin-babel';
 
 export default [
   {
-    input: 'src/awaitableThunkMiddleware.js',
-    external: ['url-mapper', 'querystring'],
+    input: 'src/reduxThunkErrorHandler.js',
+    external: ['redux-thunk-recursion-detect'],
     plugins: [
       babel({
         exclude: 'node_modules/**',
