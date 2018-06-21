@@ -1,10 +1,10 @@
 {
-  "name": "redux-action-router",
+  "name": "redux-socket.io-message-thunk",
   "version": "1.0.0",
-  "description": "A redux middleware that implements a simple, mapping between url routes and action creators.",
-  "main": "dist/reduxActionRouter.cjs.js",
-  "module": "dist/reduxActionRouter.esm.js",
-  "repository": "github:itaylor/redux-action-router",
+  "description": "A redux middleware that maps socket.io messages to action creators and thunks.",
+  "main": "dist/ioMessageMiddleware.cjs.js",
+  "module": "dist/ioMessageMiddleware.esm.js",
+  "repository": "github:itaylor/thunk-centric-redux",
   "files": [
     "dist"
   ],
@@ -19,20 +19,15 @@
   "keywords": [
     "redux",
     "middleware",
-    "action",
-    "route",
-    "routing",
+    "socket.io",
+    "message",
     "thunk"
   ],
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {
     "jest": "^23.1.0",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0",
     "rollup": "^0.60.1"
   },
-  "dependencies": {
-    "url-mapper": "^2.0.0"
-  }
+  "dependencies": {}
 }

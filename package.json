@@ -1,13 +1,13 @@
 {
   "scripts": {
-    "lint": "eslint packages --max-warnings 0",
-    "test": "lerna run test",
+    "lint": "node node_modules/.bin/eslint packages --max-warnings 0",
+    "test": "node node_modules/.bin/lerna run test",
     "pretest": "yarn run lint"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "eslint": "^4.18.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",

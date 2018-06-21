@@ -1,17 +1,17 @@
 {
-  "name": "redux-action-router",
+  "name": "redux-socket.io-error-thunk",
   "version": "1.0.0",
-  "description": "A redux middleware that implements a simple, mapping between url routes and action creators.",
-  "main": "dist/reduxActionRouter.cjs.js",
-  "module": "dist/reduxActionRouter.esm.js",
-  "repository": "github:itaylor/redux-action-router",
+  "description": "A redux middleware that handles socket.io errors by dispatching thunks that throw errors",
+  "main": "dist/ioErrorMiddleware.cjs.js",
+  "module": "dist/ioErrorMiddleware.esm.js",
+  "repository": "github:itaylor/thunk-centric-redux",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "node node_modules/.bin/rollup -c",
     "dev": "node node_modules/.bin/rollup -c -w",
-    "test": "NODE_ENV=test node node_modules/.bin/jest",
+    "test": "node node_modules/.bin/jest",
     "pretest": "yarn run build",
     "coverage": "node node_modules/.bin/jest --coverage",
     "precoverage": "yarn run build"
@@ -19,20 +19,17 @@
   "keywords": [
     "redux",
     "middleware",
-    "action",
-    "route",
-    "routing",
+    "socket.io",
+    "message",
     "thunk"
   ],
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {
     "jest": "^23.1.0",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.3.0",
     "rollup": "^0.60.1"
   },
   "dependencies": {
-    "url-mapper": "^2.0.0"
+    "es6-error": "^4.1.1"
   }
 }

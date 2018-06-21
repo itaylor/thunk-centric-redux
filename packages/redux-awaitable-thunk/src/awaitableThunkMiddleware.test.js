@@ -99,15 +99,6 @@ describe('awaitableThunks', () => {
   });
 });
 
-
-// const thunkAwaitsAnotherThunk = () => async (getState, dispatch) => {
-//   await dispatch(simpleThunk());
-//   await dispatch({ type: 'action2' });
-// };
-
-// const awaitableThunkAwaitsAnotherThunk = awaitableThunk('awaitableThunkAwaitsAnotherThunk', thunkAwaitsAnotherThunk);
-
-
 function simpleReducer(state = {
   inOrderActions: [],
 }, action) {

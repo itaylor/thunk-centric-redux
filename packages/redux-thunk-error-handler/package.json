@@ -11,7 +11,7 @@
   "scripts": {
     "build": "node node_modules/.bin/rollup -c",
     "dev": "node node_modules/.bin/rollup -c -w",
-    "test": "node node_modules/.bin/jest && yarn test:mocha",
+    "test": "NODE_ENV=test node node_modules/.bin/jest && yarn test:mocha",
     "test:mocha": "NODE_ENV=test node node_modules/.bin/mocha --require babel-register --ui tdd src/*.mochaTest.js",
     "pretest": "yarn run build",
     "coverage": "node node_modules/.bin/jest --coverage",
@@ -26,6 +26,7 @@
     "async",
     "dispatch",
     "exception",
+    "promise",
     "reject"
   ],
   "author": "ian.b.taylor@gmail.com",

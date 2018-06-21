@@ -13,7 +13,7 @@
   "scripts": {
     "build": "node node_modules/.bin/rollup -c",
     "dev": "node node_modules/.bin/rollup -c -w",
-    "test": "node node_modules/.bin/jest",
+    "test": "NODE_ENV=test node node_modules/.bin/jest",
     "pretest": "yarn run build",
     "coverage": "node node_modules/.bin/jest --coverage",
     "precoverage": "yarn run build"
