@@ -2,8 +2,11 @@
 A redux middleware that handles socket.io errors by dispatching thunks that throw errors
 
 ### This library is super opinionated:
-Requires use of the `redux-thunk` middleware.  Handles errors by dispatching thunks that throw errors, which makes sense only if you also use an error handling middleware like  * [redux-thunk-error-handler](https://www.npmjs.com/package/redux-thunk-error-handler)
+Requires use of the `redux-thunk` middleware.  Handles socket.io errors by dispatching thunks that throw errors, which makes sense only if you also use an error handling middleware like  
+* [redux-thunk-error-handler](https://www.npmjs.com/package/redux-thunk-error-handler)
 
+## A part of the [thunk-centric-redux](//github.com/itaylor/thunk-centric-redux) set of tools
+This library is part of a larger set of tools that can be helpful for making thunk-centric Redux applications.  [Visit that project](//github.com/itaylor/thunk-centric-redux) to see a runnable example app that makes use of this code in context.
 
 ### MIT License
 Copyright (c) 2015-2018 Ian Taylor

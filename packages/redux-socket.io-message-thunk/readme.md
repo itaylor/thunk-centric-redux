@@ -8,6 +8,8 @@ If you're looking for a slightly less opinionated socket.io -> redux connector, 
  * [redux-socket.io](https://www.npmjs.com/package/redux-socket.io)
  * [socket.io-promise](https://www.npmjs.com/package/socket.io-promise)
 
+## A part of the [thunk-centric-redux](//github.com/itaylor/thunk-centric-redux) set of tools
+This library is part of a larger set of tools that can be helpful for making thunk-centric Redux applications.  [Visit that project](//github.com/itaylor/thunk-centric-redux) to see a runnable example app that makes use of this code in context.
 
 ### MIT License
 Copyright (c) 2015-2018 Ian Taylor
