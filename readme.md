@@ -38,6 +38,18 @@ Generally speaking, thunk-centric implementations of Redux are a good fit for co
 
 TODO: A simple React/Redux app that uses all this functionality to do contrived pointless stuff.
 
+## Contributing
+
+This project is structured as a monorepo and uses [lerna](https://github.com/lerna/lerna) and [yarn](https://github.com/yarnpkg/yarn) to manage shared dependencies.
+
+To install everything, lint everything, build everything and run all the tests:
+```bash
+yarn
+yarn test
+```
+All libraries are packaged for distribution with Rollup.js
+All homegrown tests use Jest, any newly written tests should use a tdd style syntax.
+
 
 ### MIT License
 Copyright (c) 2015-2018 Ian Taylor
