@@ -1,7 +1,7 @@
 {
   "scripts": {
     "lint": "node node_modules/.bin/eslint packages --max-warnings 0",
-    "test": "node node_modules/.bin/lerna run test",
+    "test": "CI=true node node_modules/.bin/lerna run test",
     "pretest": "yarn run lint"
   },
   "devDependencies": {
