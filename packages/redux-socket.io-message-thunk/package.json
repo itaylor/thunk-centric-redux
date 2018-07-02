@@ -28,6 +28,5 @@
   "devDependencies": {
     "jest": "^23.1.0",
     "rollup": "^0.60.1"
-  },
-  "dependencies": {}
+  }
 }
