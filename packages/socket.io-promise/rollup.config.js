@@ -7,7 +7,7 @@ export default [
     external: ['es6-error'],
     plugins: [
       babel({
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
       }),
     ],
     output: [
