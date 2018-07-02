@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './NavBar.css';
 
 const options = [
   { url: 'home', text: 'Home' },
@@ -7,8 +8,8 @@ const options = [
   { url: 'errorHandler', text: 'Error handler Examples' }
 ]
 
-export default function NavBar({ activeView }) {
-  return <ul> {
+export default function NavBar({ activeView, className='NavBar' }) {
+  return <ul className={ className }> {
      options.map(({ url, text }) =>
       <li key={ url } className={  activeView === url ? 'active' : '' }>
         <a href={`#/${url}`}>{ text }</a>

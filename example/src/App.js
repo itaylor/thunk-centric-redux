@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import logo from './logo.svg';
 import './App.css';
-import Body from './components/Body.js';
+import Main from './components/Main.js';
 import NavBar from './components/NavBar.js';
 
 const mapStateToProps = (state) => {
@@ -14,15 +13,14 @@ const mapStateToProps = (state) => {
 class App extends Component {
 
   render() {
-    const { activeView } = this.props;
+    const { activeView = 'home' } = this.props;
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Thunk-centric-redux Example</h1>
           <NavBar activeView={ activeView } />
         </header>
-        <Body activeView={ activeView }/>
+        <Main activeView={ activeView }/>
       </div>
     );
   }

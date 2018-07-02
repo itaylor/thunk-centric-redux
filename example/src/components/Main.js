@@ -4,7 +4,11 @@ import SocketIoContent from './SocketIoContent.js';
 import HomeContent from './HomeContent.js';
 import ErrorHandlerContent from './ErrorHandlerContent.js';
 
-export default function Body({ activeView }) {
+export default function Main({ activeView }) {
+  return <main>{ getActiveContent(activeView) }</main>
+}
+
+function getActiveContent(activeView) {
   switch (activeView) {
     case 'socket.io':
       return <SocketIoContent/>;
@@ -16,6 +20,6 @@ export default function Body({ activeView }) {
   }
 }
 
-Body.propTypes = {
+Main.propTypes = {
   activeView: PropTypes.string,
 }

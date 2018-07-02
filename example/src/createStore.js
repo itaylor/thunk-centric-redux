@@ -1,7 +1,7 @@
 /* global window */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createThunkErrorHandlerMiddleware from 'redux-thunk-error-handler';
-import createRouterMiddleware from 'redux-action-router';
+import createRouterMiddleware, { processCurrentUrl } from 'redux-action-router';
 import routes from './routes.js';
 import thunkMiddleware from 'redux-thunk-recursion-detect';
 import createIoPromise from 'socket.io-promise';
@@ -16,9 +16,11 @@ const ioPromise = createIoPromise(socket);
 const initialState = {};
 const enhancers = [];
 
+const routerMiddleware = createRouterMiddleware(routes);
+
 const middleware = [
   createThunkErrorHandlerMiddleware(errorHandler),
-  createRouterMiddleware(routes),
+  routerMiddleware,
   thunkMiddleware.withExtraArgument(ioPromise),
 ];
 
@@ -32,5 +34,9 @@ const store = createStore(
   initialState,
   composedEnhancers
 );
+
+// Runs the router on the current url.
+// Do this after the store has been created and the middleware initialized.
+processCurrentUrl();
 
 export default store;
