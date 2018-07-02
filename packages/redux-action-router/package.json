@@ -1,6 +1,6 @@
 {
   "name": "redux-action-router",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A redux middleware that implements a simple, mapping between url routes and action creators.",
   "main": "dist/reduxActionRouter.cjs.js",
   "module": "dist/reduxActionRouter.esm.js",
