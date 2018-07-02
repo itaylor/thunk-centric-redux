@@ -1,6 +1,6 @@
 {
   "name": "redux-socket.io-message-thunk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A redux middleware that maps socket.io messages to action creators and thunks.",
   "main": "dist/ioMessageMiddleware.cjs.js",
   "module": "dist/ioMessageMiddleware.esm.js",
