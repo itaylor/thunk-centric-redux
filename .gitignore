@@ -3,3 +3,4 @@ coverage
 node_modules
 .DS_Store
 lerna-debug.log
+yarn-error.log
