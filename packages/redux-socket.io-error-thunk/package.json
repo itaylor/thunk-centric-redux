@@ -1,6 +1,6 @@
 {
   "name": "redux-socket.io-error-thunk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A redux middleware that handles socket.io errors by dispatching thunks that throw errors",
   "main": "dist/ioErrorMiddleware.cjs.js",
   "module": "dist/ioErrorMiddleware.esm.js",
