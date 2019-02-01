@@ -35,13 +35,13 @@ const logoutThunk = async (dispatch) => {
   delete localStorage.myStuff;
 }
 
-const errorHandlerMiddleware = createThunkErrorHandlerMiddleware(myErrorHandler);
+const errorHandlerMiddleware = createThunkErrorHandlerMiddleware({ onError: myErrorHandler });
 const store = createStore(myReducerFn, applyMiddleware(errorHandlerMiddleware, thunkMiddleware));
 ```
 You probably always want this middleware to come before the thunk middleware in the `applyMiddleware` chain.
 
 ## Implementing an error handler
-An error handler is a function that takes a single argument, the error that was thrown or rejected.  This is passed as the only argument to `createThunkErrorHandlerMiddleware()` (the default export).  The result of calling the errorHandler function will be `dispatch`ed if it's not falsey.
+An error handler is a function that takes a single argument, the error that was thrown or rejected.  This is passed as the `onError` property of an object as the first argument of `createThunkErrorHandlerMiddleware()` (the default export).  The result of calling the errorHandler function will be `dispatch`ed if it's not falsey.
 
 Your error handler will probably interrogate that error object to figure out what your app needs to do.  You may wish to handle errors of specified types differently, if you have typed errors that your app throws, then you may want to use `instanceof` to do the checks.  Checking a `.type` property on the errors is also possible if your app is `reject`ing action objects.  You can also always check the `.message` property.
 
