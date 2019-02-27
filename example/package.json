@@ -1,6 +1,6 @@
 {
   "name": "thunk-centric-redux-example",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "dependencies": {
     "concurrently": "^3.6.0",
@@ -12,9 +12,9 @@
     "redux": "^4.0.0",
     "redux-action-router": "^1.0.4",
     "redux-awaitable-thunk": "^1.0.4",
-    "redux-socket.io-error-thunk": "^1.0.4",
+    "redux-socket.io-error-thunk": "^1.1.0",
     "redux-socket.io-message-thunk": "^1.0.4",
-    "redux-thunk-error-handler": "^1.0.4",
+    "redux-thunk-error-handler": "^1.0.5-alpha.0",
     "redux-thunk-recursion-detect": "^1.0.4",
     "socket.io": "^2.1.1",
     "socket.io-promise": "^1.0.4"
