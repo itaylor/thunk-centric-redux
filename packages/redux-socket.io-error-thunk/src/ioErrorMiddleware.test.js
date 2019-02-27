@@ -66,4 +66,29 @@ describe('ioErrorMiddleware', () => {
       expect(() => firstCallArg(mockStore.dispatch)).toThrow(err);
     });
   });
+
+  test('Passes object properties through to ioError object', () => {
+    const mockSocket = new MockSocket();
+    const ioMiddleware = createIoErrorMiddleware(mockSocket);
+    const mockStore = new MockStore();
+    ioMiddleware(mockStore);
+    const errTypes = ['error', 'serverError', 'connect_failed'];
+    errTypes.forEach((errType) => {
+      mockStore.dispatch.mockClear();
+      const err = { just: 'anObject', type: 'rad', message: 'I set the message' };
+      mockSocket.emitMockMessage(errType, err);
+      expect(mockStore.dispatch).toHaveBeenCalledTimes(1);
+      const firstCallArg = mockStore.dispatch.mock.calls[0][0];
+      expect(typeof firstCallArg).toBe('function');
+      try {
+        firstCallArg(mockStore.dispatch);
+        expect(true).toBe(false);
+      } catch (e) {
+        expect(e.just).toBe('anObject');
+        expect(e.type).toBe('rad');
+        expect(e).toBeInstanceOf(IoError);
+        expect(e.message).toBe('I set the message');
+      }
+    });
+  });
 });

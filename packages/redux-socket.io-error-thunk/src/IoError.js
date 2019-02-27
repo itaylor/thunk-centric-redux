@@ -7,7 +7,7 @@ export default class IoError extends ExtendableError {
     if (typeof msg === 'string') {
       message = msg;
     }
-    const { type: msgType, message: msgMessage } = msg;
+    const { type: msgType, message: msgMessage, ...rest } = msg;
     type = msgType || type;
     message = msgMessage || message;
 
@@ -16,5 +16,8 @@ export default class IoError extends ExtendableError {
     }
     super(message);
     this.type = type;
+    if (Object.keys(rest).length) {
+      Object.assign(this, rest);
+    }
   }
 }
