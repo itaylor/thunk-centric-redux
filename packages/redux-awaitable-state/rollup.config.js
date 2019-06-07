@@ -3,7 +3,7 @@ import babel from 'rollup-plugin-babel';
 
 export default [
   {
-    input: 'src/awaitableThunkMiddleware.js',
+    input: 'src/awaitableState.js',
     plugins: [
       babel({
         exclude: 'node_modules/**',

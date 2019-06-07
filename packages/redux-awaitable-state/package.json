@@ -1,0 +1,35 @@
+{
+  "name": "redux-awaitable-state",
+  "version": "1.0.0-pre",
+  "description": "A utility that allows you to await a future state a redux store, allowing for complex flow control within thunks.",
+  "main": "dist/awaitableState.cjs.js",
+  "module": "dist/awaitableState.esm.js",
+  "repository": "github:itaylor/thunk-centric-redux",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node node_modules/.bin/rollup -c",
+    "dev": "node node_modules/.bin/rollup -c -w",
+    "test": "NODE_ENV=test node node_modules/.bin/jest",
+    "pretest": "yarn run build",
+    "coverage": "node node_modules/.bin/jest --coverage",
+    "precoverage": "yarn run build"
+  },
+  "keywords": [
+    "redux",
+    "state",
+    "flow-control",
+    "await",
+    "async",
+    "side-effects"
+  ],
+  "author": "ian.b.taylor@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.1.0",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "rollup": "^0.60.1"
+  }
+}
