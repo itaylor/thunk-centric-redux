@@ -27,6 +27,7 @@ Generally speaking, thunk-centric implementations of Redux are a good fit for co
 ## What tools are in this repo
 
 * [`redux-action-router`](packages/redux-action-router/readme.md) A router that dispatches thunks (or regular actions) on route changes.
+* [`redux-awaitable-state`](packages/redux-awaitable-state/readme.md) A library that allows you easily await changes to the state store.  This is expecially useful for resolving race conditions between two separate concerns, like animation and data fetching.
 * [`redux-awaitable-thunk`](packages/redux-awaitable-thunk/readme.md) A library that allows you give thunks names, and then sequence them using Promises and `async`/`await`.  It's kinda sorta like `redux-saga` if you squint hard enough 👓, but instead of having to write everything as a saga using generators, you can just layer it into your existing thunks on an as-needed basis.
 * [`redux-thunk-recursion-detect`](packages/redux-thunk-recusion-detect/readme.md) If you're dispatching thunks from within other thunks (which if you're fully thunk-centric, you definitely will be) you may encounter edge cases that require you to know if you're in the top-most thunk.  This drop-in replacement for `redux-thunk` makes knowing that possible.
 * [`redux-thunk-error-handler`](packages/redux-thunk-error-handler/readme.md) Handles errors in both sync and async thunks.  Handles the errors by dispatching even more thunks.
