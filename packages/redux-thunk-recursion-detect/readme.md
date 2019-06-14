@@ -4,7 +4,7 @@ A drop-in replacement for `redux-thunk` that allows other middleware to detect t
 ## WTF, why would I care about this?
 Ah, yes, a very good question.  I wish the answer was "you don't ever have to" and this middleware didn't need to exist.  However, there exist some edge cases, (error handling being one of them) where knowing that you're at the top of the redux `dispatch` call stack is important.
 
-I wrote an explanation that helps understand one such case in [redux-thunk-error-handler's thunkErrorHandling.md](//github.com/itaylor/thunk-centric-redux/packages/redux-thunk-error-handler/thunkErrorHandling.md)
+I wrote an explanation that helps understand one such case in [redux-thunk-error-handler's thunkErrorHandling.md](//github.com/itaylor/thunk-centric-redux/blob/master/packages/redux-thunk-error-handler/thunkErrorHandling.md)
 
 
 ## Usage
@@ -39,7 +39,7 @@ export const myCoolMiddleware = store => next => action => {
 }
 ```
 
-Take a look at [redux-thunk-error-handler](//github.com/itaylor/thunk-centric-redux/packages/redux-thunk-error-handler/) to see a real application of this middleware.
+Take a look at [redux-thunk-error-handler](//github.com/itaylor/thunk-centric-redux/blob/master/packages/redux-thunk-error-handler/) to see a real application of this middleware.
 
 ## A part of the [thunk-centric-redux](//github.com/itaylor/thunk-centric-redux) set of tools
 This library is part of a larger set of tools that can be helpful for making thunk-centric Redux applications.  [Visit that project](//github.com/itaylor/thunk-centric-redux) to see a runnable example app that makes use of this code in context.
