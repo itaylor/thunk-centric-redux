@@ -1,6 +1,6 @@
 {
   "name": "socket.io-promise",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "An opinionated Promise wrapper around socket.io's emit/ack",
   "main": "dist/ioPromise.cjs.js",
   "module": "dist/ioPromise.esm.js",
