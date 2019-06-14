@@ -27,9 +27,9 @@
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "chai": "^4.1.2",
-    "jest": "^23.1.0",
-    "redux": "^4.0.0",
-    "rollup": "^0.60.1"
+    "chai": "^4.2.0",
+    "jest": "^24.8.0",
+    "redux": "^4.0.1",
+    "rollup": "^1.15.3"
   }
 }

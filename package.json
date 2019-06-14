@@ -1,23 +1,26 @@
 {
   "scripts": {
+    "build": "node node_modules/.bin/lerna run build",
     "lint": "node node_modules/.bin/eslint packages --max-warnings 0",
     "test": "CI=true node node_modules/.bin/lerna run test",
     "pretest": "yarn run lint"
   },
   "devDependencies": {
-    "babel-jest": "^23.0.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "eslint": "^4.18.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "babel-jest": "^24.8.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jest": "^21.12.2",
-    "jest": "^23.1.0",
-    "lerna": "^2.11.0",
-    "rollup": "^0.60.1",
-    "rollup-plugin-babel": "^3.0.4",
-    "rollup-plugin-commonjs": "^8.3.0",
-    "rollup-plugin-node-resolve": "^3.0.3"
+    "eslint-plugin-jest": "^22.6.4",
+    "jest": "^24.8.0",
+    "lerna": "^3.15.0",
+    "rollup": "^1.15.3",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.2"
+  },
+  "dependencies": {
   }
 }

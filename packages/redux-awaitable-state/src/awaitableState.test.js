@@ -59,7 +59,7 @@ function simpleReducer(state = {
 }, action) {
   if (action.type.startsWith('action')) {
     return { ...state, inOrderActions: state.inOrderActions.concat([action.type]) };
-  } else if (action.type === 'clear') {
+  } if (action.type === 'clear') {
     return { ...state, inOrderActions: [] };
   }
   return state;

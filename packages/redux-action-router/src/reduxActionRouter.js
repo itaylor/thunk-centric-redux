@@ -1,6 +1,6 @@
 import urlMapper from 'url-mapper';
-import hashchangeSupport from './hashchangeSupport.js';
 import querystring from 'querystring';
+import hashchangeSupport from './hashchangeSupport.js';
 
 let urlSupport;
 

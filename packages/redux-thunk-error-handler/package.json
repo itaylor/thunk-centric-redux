@@ -12,7 +12,7 @@
     "build": "node node_modules/.bin/rollup -c",
     "dev": "node node_modules/.bin/rollup -c -w",
     "test": "NODE_ENV=test node node_modules/.bin/jest && yarn test:mocha",
-    "test:mocha": "NODE_ENV=test node node_modules/.bin/mocha --require babel-register --ui tdd src/*.mochaTest.js",
+    "test:mocha": "NODE_ENV=test node node_modules/.bin/mocha --require @babel/register --ui tdd src/*.mochaTest.js",
     "pretest": "yarn run build",
     "coverage": "node node_modules/.bin/jest --coverage",
     "precoverage": "yarn run build"
@@ -32,12 +32,12 @@
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "babel-register": "6.26.0",
-    "expect": "^23.1.0",
-    "jest": "^23.1.0",
-    "mocha": "^5.2.0",
-    "redux": "^4.0.0",
-    "rollup": "^0.60.1"
+    "@babel/register": "^7.4.4",
+    "expect": "^24.8.0",
+    "jest": "^24.8.0",
+    "mocha": "^6.1.4",
+    "redux": "^4.0.1",
+    "rollup": "^1.15.3"
   },
   "dependencies": {
     "redux-thunk-recursion-detect": "^1.0.4"

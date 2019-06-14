@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
-import createErrorCatchMiddleware, { forceHandleError } from '../dist/reduxThunkErrorHandler.esm.js';
 import thunkMiddleware from 'redux-thunk-recursion-detect';
+import createErrorCatchMiddleware, { forceHandleError } from '../dist/reduxThunkErrorHandler.esm.js';
 
 describe('error catch middleware', () => {
   test('error in sync thunk', () => {

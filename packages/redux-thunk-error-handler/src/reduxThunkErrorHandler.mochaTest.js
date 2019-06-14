@@ -3,9 +3,9 @@
 // as they are caught by the parent process and turned into
 // jest failures. So this single test case has to run in mocha instead.
 import { createStore, applyMiddleware } from 'redux';
-import createErrorCatchMiddleware from '../dist/reduxThunkErrorHandler.esm.js';
 import thunkMiddleware from 'redux-thunk-recursion-detect';
 import expect from 'expect';
+import createErrorCatchMiddleware from '../dist/reduxThunkErrorHandler.esm.js';
 
 suite('reduxThunkErrorHandler mocha tests', () => {
   test('nested async errors that are not awaited are not handled automatically', wrapUnhandledRejection(async (rejState) => {

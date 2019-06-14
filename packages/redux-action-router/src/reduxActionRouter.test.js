@@ -125,8 +125,7 @@ describe('Action router tests', () => {
     const createStoreWithMiddleware = applyMiddleware(routerMiddleware)(createStore);
     const store = createStoreWithMiddleware(simpleReducer);
     // There is a path param 'payload' which takes precedence over the query param payload.
-    window.location.href =
-      '#/somethingElse/hey?multiQP=test%20%E2%B7%AF&multiQP=number%20X';
+    window.location.href = '#/somethingElse/hey?multiQP=test%20%E2%B7%AF&multiQP=number%20X';
 
     await sleep();
     expect(store.getState().action8).toBe('heytest ⷯnumber X');

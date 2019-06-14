@@ -26,8 +26,8 @@
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^23.1.0",
-    "rollup": "^0.60.1"
+    "jest": "^24.8.0",
+    "rollup": "^1.15.3"
   },
   "dependencies": {
     "es6-error": "^4.1.1"

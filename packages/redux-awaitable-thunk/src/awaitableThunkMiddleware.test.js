@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
-import awaitableThunkMiddleware, { awaitableThunk, inProgress, after, resetThunkState, afterExactly } from './awaitableThunkMiddleware.js';
 import thunkMiddleware from 'redux-thunk';
+import awaitableThunkMiddleware, {
+  awaitableThunk, inProgress, after, resetThunkState, afterExactly,
+} from './awaitableThunkMiddleware.js';
 
 const createStoreWithMiddleware = applyMiddleware(awaitableThunkMiddleware, thunkMiddleware)(createStore);
 
