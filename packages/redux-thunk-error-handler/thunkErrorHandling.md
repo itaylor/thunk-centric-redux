@@ -169,12 +169,12 @@ So, to keep using this middleware-based approach safely, we'd have to make a rul
 ## What we want:
 * A single place to put all code that handles *common* errors
 * No additional boilerplate in our thunks
-What we won't give up:
+## What we won't give up:
 * The ability to nest thunk dispatch calls within other thunks
 * The ability to handle errors locally within a thunk (in addition to the common error handler)
 
 
 ## What we built to achieve these goals:
 
-* [redux-thunk-recursion-detect](//github.com/itaylor/thunk-centric-redux/packages/redux-thunk-recursion-detect/readme.md) A drop-in replacement for `redux-thunk` middleware.  It is 100% API compatible with vanilla redux-thunk.  It adds only one thing, the ability to detect that a thunk was dispatched from within another thunk.
-* [redux-thunk-error-handler](//github.com/itaylor/thunk-centric-redux/packages/redux-thunk-error-handler/readme.md) A middleware that handles both sync and async/promise errors/rejections within thunks and which uses the `isNestedThunkSymbol` export from `redux-thunk-recursion-detect` to be able to let errors bubble naturally and only handle them at the top level.
+* [redux-thunk-recursion-detect](//github.com/itaylor/thunk-centric-redux/blob/master/packages/redux-thunk-recursion-detect/readme.md) A drop-in replacement for `redux-thunk` middleware.  It is 100% API compatible with vanilla redux-thunk.  It adds only one thing, the ability to detect that a thunk was dispatched from within another thunk.
+* [redux-thunk-error-handler](//github.com/itaylor/thunk-centric-redux/blob/master/packages/redux-thunk-error-handler/readme.md) A middleware that handles both sync and async/promise errors/rejections within thunks and which uses the `isNestedThunkSymbol` export from `redux-thunk-recursion-detect` to be able to let errors bubble naturally and only handle them at the top level.
