@@ -90,6 +90,8 @@ declare const thunk: ThunkMiddleware & {
 
 export default thunk;
 
+export declare const isNestedThunkSymbol: symbol;
+
 /**
  * Redux behaviour changed by middleware, so overloads here
  */

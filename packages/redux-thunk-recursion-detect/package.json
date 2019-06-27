@@ -25,6 +25,7 @@
     "nested",
     "flow-control"
   ],
+  "types": "index.d.ts",
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {

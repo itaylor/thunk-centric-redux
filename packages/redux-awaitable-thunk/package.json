@@ -6,8 +6,10 @@
   "module": "dist/awaitableThunkMiddleware.esm.js",
   "repository": "github:itaylor/thunk-centric-redux",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
+  "types": "index.d.ts",
   "scripts": {
     "build": "node node_modules/.bin/rollup -c",
     "dev": "node node_modules/.bin/rollup -c -w",
