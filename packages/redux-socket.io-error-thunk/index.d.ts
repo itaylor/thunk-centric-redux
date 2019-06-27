@@ -21,3 +21,5 @@ declare function createIoErrorMiddleware<
     TState,
     ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
   >;
+
+export default createIoErrorMiddleware;

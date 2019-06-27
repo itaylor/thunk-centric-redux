@@ -1,11 +1,11 @@
 import { Action, Middleware } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk-recursion-detect';
 
-interface IoMessageSocket {
+export interface IoMessageSocket {
   on(eventName: string, listener: Function): void;
 }
 
-interface IoMessageHandlers<
+export interface IoMessageHandlers<
   TBasicAction extends Action,
   TReturnType,
   TState,
@@ -29,3 +29,5 @@ declare function createIoMessageMiddleware<
     TState,
     ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
   >;
+
+export default createIoMessageMiddleware;
