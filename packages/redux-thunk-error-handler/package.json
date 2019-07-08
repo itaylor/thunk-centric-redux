@@ -33,6 +33,9 @@
   ],
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
+  "peerDependencies": {
+    "redux": "^4.0.1"
+  },
   "devDependencies": {
     "@babel/register": "^7.4.4",
     "expect": "^24.8.0",

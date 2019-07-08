@@ -26,12 +26,17 @@
     "thunk",
     "await"
   ],
+  "peerDependencies": {
+    "redux": "^4.0.1",
+    "redux-thunk-recursion-detect": "^1.1.1"
+  },
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {
     "jest": "^24.8.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "redux-thunk-recursion-detect": "^1.1.1",
     "rollup": "^1.15.3"
   }
 }

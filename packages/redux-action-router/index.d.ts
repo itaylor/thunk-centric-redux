@@ -48,9 +48,9 @@ export interface ActionRouterOpts<
   TReturnType = any,
   TValues = any,
 > {
-  dispatcher(store: TStore, match: (values: TValues) => TAction, values: TValues, path: string): void;
-  actionHandler(store: TStore, next: (action: TAction | SetUrlAction | SetUrlRouteAction) => TReturnType, action: TAction | SetUrlAction | SetUrlRouteAction): TReturnType;
-  urlSupport: (onChange: (url: string) => void) => UrlSupport;
+  dispatcher?: (store: TStore, match: (values: TValues) => TAction, values: TValues, path: string) => void;
+  actionHandler?: (store: TStore, next: (action: TAction | SetUrlAction | SetUrlRouteAction) => TReturnType, action: TAction | SetUrlAction | SetUrlRouteAction) => TReturnType;
+  urlSupport?: (onChange: (url: string) => void) => UrlSupport;
 }
 
 declare function createActionRouterMiddleware<

@@ -1,5 +1,5 @@
-import { Action, Middleware } from 'redux';
-import { ThunkAction } from 'redux-thunk-recursion-detect';
+import { Action, Middleware, AnyAction } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk-recursion-detect';
 
 export declare function awaitableThunk<
   Name extends string,
@@ -22,7 +22,7 @@ export interface AwaitableThunkAction<
   TExtraThunkArg,
   TBasicAction extends Action,
   AwaitableNames extends string = string
-> {
+> extends ThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction> {
   (
     dispatch: AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, AwaitableNames>,
     getState: () => TState,
@@ -36,22 +36,23 @@ export interface AwaitableThunkDispatch<
   TExtraThunkArg,
   TBasicAction extends Action,
   AwaitableNames extends string = string,
-> {
+> extends ThunkDispatch<TState, TExtraThunkArg, TBasicAction> {
   <TReturnType>(
     thunkAction: AwaitableThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction, AwaitableNames>
   ): TReturnType;
   <A extends TBasicAction>(action: A): A;
 }
 
-declare function awaitableThunkMiddleware<
-  TState,
-  TExtraThunkArg,
-  TBasicAction extends Action,
+export type AwaitableThunkMiddleware<
+  TState = unknown,
+  TExtraThunkArg = undefined,
+  TBasicAction extends Action = AnyAction,
   AwaitableNames extends string = string,
->(): Middleware<
+> = Middleware<
   AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, AwaitableNames>,
-  TState,
-  AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, AwaitableNames>
+  TState
 >;
+
+declare const awaitableThunkMiddleware: AwaitableThunkMiddleware;
 
 export default awaitableThunkMiddleware;

@@ -58,7 +58,7 @@ export function inProgress(name) {
 }
 
 export function isInProgress(name) {
-  return thunkState.inProgress[name] && thunkState.inProgress[name] > 0;
+  return Boolean(thunkState.inProgress[name] && thunkState.inProgress[name] > 0);
 }
 
 function addPromise(name, resolve, reject, nCalls) {
