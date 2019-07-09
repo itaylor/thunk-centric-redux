@@ -6,8 +6,10 @@
   "module": "dist/awaitableState.esm.js",
   "repository": "github:itaylor/thunk-centric-redux",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
+  "types": "index.d.ts",
   "scripts": {
     "build": "node node_modules/.bin/rollup -c",
     "dev": "node node_modules/.bin/rollup -c -w",
@@ -26,6 +28,9 @@
   ],
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
+  "peerDependencies": {
+    "redux": "^4.0.1"
+  },
   "devDependencies": {
     "jest": "^24.8.0",
     "redux": "^4.0.1",

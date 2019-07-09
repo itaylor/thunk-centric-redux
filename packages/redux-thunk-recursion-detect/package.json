@@ -25,6 +25,10 @@
     "nested",
     "flow-control"
   ],
+  "peerDependencies": {
+    "redux": "^4.0.1"
+  },
+  "types": "index.d.ts",
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "devDependencies": {

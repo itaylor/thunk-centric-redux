@@ -6,8 +6,10 @@
   "module": "dist/reduxThunkErrorHandler.esm.js",
   "repository": "github:itaylor/thunk-centric-redux",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
+  "types": "index.d.ts",
   "scripts": {
     "build": "node node_modules/.bin/rollup -c",
     "dev": "node node_modules/.bin/rollup -c -w",
@@ -31,6 +33,9 @@
   ],
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
+  "peerDependencies": {
+    "redux": "^4.0.1"
+  },
   "devDependencies": {
     "@babel/register": "^7.4.4",
     "expect": "^24.8.0",
