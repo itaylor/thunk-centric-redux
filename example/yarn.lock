@@ -2620,10 +2620,10 @@ concat-stream@^1.5.0:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
-concurrently@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/concurrently/-/concurrently-4.1.0.tgz#17fdf067da71210685d9ea554423ef239da30d33"
-  integrity sha512-pwzXCE7qtOB346LyO9eFWpkFJVO3JQZ/qU/feGeaAHiX1M3Rw3zgXKc5cZ8vSH5DGygkjzLFDzA/pwoQDkRNGg==
+concurrently@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/concurrently/-/concurrently-4.1.1.tgz#42cf84d625163f3f5b2e2262568211ad76e1dbe8"
+  integrity sha512-48+FE5RJ0qc8azwKv4keVQWlni1hZeSjcWr8shBelOBtBHcKj1aJFM9lHRiSc1x7lq416pkvsqfBMhSRja+Lhw==
   dependencies:
     chalk "^2.4.1"
     date-fns "^1.23.0"
@@ -8079,46 +8079,46 @@ recursive-readdir@2.2.2:
   dependencies:
     minimatch "3.0.4"
 
-redux-action-router@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/redux-action-router/-/redux-action-router-1.0.4.tgz#66c6db882a013c05171bd8daf245f61562ab9d14"
-  integrity sha512-lNCKDjDtxI7isGGjlEtODreKP9Vvr5+w7tm+/EVOs1aWsMOE2H3qqY9dJs97JwmaRrgdE0clGuJFcPveXdsqUw==
+redux-action-router@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/redux-action-router/-/redux-action-router-1.1.0.tgz#1739ee42de145b6db416e75cf12c06b8993a601b"
+  integrity sha512-N53eGRDmzKVGYLsQhnofeR41FXnZkut69SPr2fcJvnrJHw8h8ni6LZ8xerVvTjHAWwdymmSqHpWZJM+j3EHCSg==
   dependencies:
     url-mapper "^2.0.0"
 
-redux-awaitable-thunk@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/redux-awaitable-thunk/-/redux-awaitable-thunk-1.0.5.tgz#a66f003c9f85f2a7b24ba7d17fb76cfe0d40c0b9"
-  integrity sha512-gl9IB8dkxScYzNVURWAUNPFoLbSWKzBn7BNds2h/jJgtKyUW104+caU1tyVmVZiT/oTwnc52VchFoc0ERrGhOA==
-
-redux-socket.io-error-thunk@^1.1.0:
+redux-awaitable-thunk@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/redux-socket.io-error-thunk/-/redux-socket.io-error-thunk-1.1.0.tgz#581789dd8097a6f5b5fe9fc091de41ca45c541cc"
-  integrity sha512-yXP3GAdqLTz3Vhk6++zP+IJs4IJgg4NeIDzZH2Ub4xtfskb2AXqLFtx/9FpnJ8ZDjqBIGa03yVcSb02UFR5kzQ==
+  resolved "https://registry.yarnpkg.com/redux-awaitable-thunk/-/redux-awaitable-thunk-1.1.0.tgz#66ff6c8466fc72e4d038c90b82106c91994e0414"
+  integrity sha512-2F03hxuGNtQRHTQ9CLSN4tlArC8+T8Yl1WApvccIo2WaenACHYlPfKYqokWSCupAYjdcK47LCatk7cj5qd6ToQ==
+
+redux-socket.io-error-thunk@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/redux-socket.io-error-thunk/-/redux-socket.io-error-thunk-1.2.0.tgz#d5253a2984d291a984b218612f0d176adffa8aa9"
+  integrity sha512-Ppv7zme5cf/EzAUMCp8R5zEq3FQwKykACk1s/VkMCfQCJgyUQAKmz1igLgi02USSXNatiIrrIvERJgaKCCZJew==
   dependencies:
     es6-error "^4.1.1"
 
-redux-socket.io-message-thunk@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/redux-socket.io-message-thunk/-/redux-socket.io-message-thunk-1.0.4.tgz#d9020142ddecf915cfdf9fb96e51aa2774632da4"
-  integrity sha512-lNocC/4ZBvoAqd6reGoyNLUyOFo7NLSw3KSZACxaKNXF0b6l/gnfpWvotRBObaTURj+4GbEO9hs6XVoW05dfoQ==
+redux-socket.io-message-thunk@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/redux-socket.io-message-thunk/-/redux-socket.io-message-thunk-1.1.0.tgz#8cd5125b91748bb13b779615e078a00b079fb6ce"
+  integrity sha512-5J6blKkbdc8OU5dovbbdPhZjHv7zW9qLzstpagxLo2fFVsLcdZ8YK/WNw94KG2V1iBgsjzddIW8WHoTgtsmu6Q==
 
-redux-thunk-error-handler@^1.0.6-alpha.0:
-  version "1.0.6-alpha.0"
-  resolved "https://registry.yarnpkg.com/redux-thunk-error-handler/-/redux-thunk-error-handler-1.0.6-alpha.0.tgz#ed25924a22e2234b74c05c1624767c2ee923fe25"
-  integrity sha512-8/ZvPlwZrgNz05ZgLQ/BVDvhHGTJQMO9cMsbmvqhrXBS9gB4lz0CvEekXEqcfO+bSLjKJa6NEtifodvJVZRRPA==
+redux-thunk-error-handler@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/redux-thunk-error-handler/-/redux-thunk-error-handler-1.1.1.tgz#2880e4d79da83fe4dcf87879e4c0e0fe035b495c"
+  integrity sha512-c3W+b2xeIH4kF4WwB99mw9toZxhxZ+jka091cz3Qwg5X+XCeudbjg/jNNBdGGGhS0zhg8m1UHyKTF7cjDEu48A==
   dependencies:
-    redux-thunk-recursion-detect "^1.0.4"
+    redux-thunk-recursion-detect "^1.1.1"
 
-redux-thunk-recursion-detect@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/redux-thunk-recursion-detect/-/redux-thunk-recursion-detect-1.0.4.tgz#cdede89bcbaf0db9cc7bbcd48deb9170830d9711"
-  integrity sha512-migxQiJbxzwZLbRSid7LhIDtnN/ARznRE7c1O/EoTm28NqkdkQn+TV/kN75CxPVF7tMvXXATIhuqaqRCBRA4QQ==
+redux-thunk-recursion-detect@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/redux-thunk-recursion-detect/-/redux-thunk-recursion-detect-1.1.1.tgz#7f1b13d0442bc287f37bb46e2d6943dab13d0f00"
+  integrity sha512-s50xHim5GJJQ1s5ZFXx43ZxP1L7041Fa/ZkDn+MKvmsWd0oP7wCjQPjX3LUu6fUrlyKdY1hS60cQcMV53nvC3g==
 
-redux@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
-  integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
+redux@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.3.tgz#0ca18be085e6cf6ed50e445a125f85e8b26b266b"
+  integrity sha512-v/Iaw67Pe+na+cZvcKvPxAKT1ww5kM+M09fmaCndCQC4Lo434AYb5975HJgJlp0D7dJxfYaLxMD4VwfpLOZ1Rw==
   dependencies:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
@@ -8736,10 +8736,10 @@ socket.io-parser@~3.3.0:
     debug "~3.1.0"
     isarray "2.0.1"
 
-socket.io-promise@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/socket.io-promise/-/socket.io-promise-1.0.4.tgz#01879388ec579522ad1bce1f835d94a9b167bf8e"
-  integrity sha512-gw6zXnEd+gtvyN7OFnDr1U/oAm8SO6cQ7TBORM1rtv9fYzAf+EN+aFF/SHed//QoDsl2R5d0xtgJvdG3EBC66g==
+socket.io-promise@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/socket.io-promise/-/socket.io-promise-1.1.0.tgz#be54911358ba425365006b32933208db6ff568b0"
+  integrity sha512-vOygb4tE3JHmAIaxwhbFgjWMwR3pVaggddmOh7f3j5HQiFrbcZViS8jDRWg6G2NWSNLoKCShMUeeK393qXpW7A==
   dependencies:
     es6-error "^4.1.1"
 
