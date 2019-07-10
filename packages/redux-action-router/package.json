@@ -4,7 +4,7 @@
   "description": "A redux middleware that implements a simple, mapping between url routes and action creators.",
   "main": "dist/reduxActionRouter.cjs.js",
   "module": "dist/reduxActionRouter.esm.js",
-  "repository": "github:itaylor/redux-action-router",
+  "repository": "github:itaylor/thunk-centric-redux",
   "files": [
     "dist",
     "index.d.ts"
