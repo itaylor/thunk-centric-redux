@@ -13,26 +13,29 @@ export interface SetUrlRouteAction {
 
 export declare function processCurrentUrl(): void;
 
-export declare function actionHandler<
-  TState,
-  TReturnType = any,
-  TAction extends AnyAction = AnyAction
->(store: Store<TState, TAction>, next: (action: TAction | SetUrlAction | SetUrlRouteAction) => TReturnType, action: TAction | SetUrlAction | SetUrlRouteAction): TReturnType;
+export declare function actionHandler<TAction, TReturnType>(next: (action: TAction) => TReturnType, action: TAction): TReturnType;
 
 export declare function dispatcher<
-  TState,
-  TAction extends AnyAction = AnyAction,
-  TValues = any
->(store: Store<TState, TAction>, match: (values: TValues) => TAction, values: TValues, path: string): void;
-
-export interface RoutesMap<
-  TBasicAction extends Action,
-  TReturnType,
+  TValues,
   TState,
   TExtraThunkArg,
+  TBasicAction extends Action,
+  TReturnTypeConstraint = unknown
+>(
+  store: { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint> },
+  match: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>,
+  values: TValues,
+  path: string
+): void;
+
+export interface RoutesMap<
+  TState,
+  TExtraThunkArg,
+  TBasicAction extends Action,
+  TReturnTypeConstraint = unknown,
   TValues = any
 > {
-  [url: string]: (values: TValues) => TBasicAction | ThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction>;
+  [url: string]: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>;
 }
 
 export interface UrlSupport {
@@ -42,26 +45,33 @@ export interface UrlSupport {
 }
 
 export interface ActionRouterOpts<
+  TValues,
   TState,
-  TAction extends AnyAction = AnyAction,
-  TStore extends Store<TState, TAction> = Store<TState, TAction>,
-  TReturnType = any,
-  TValues = any,
+  TExtraThunkArg,
+  TBasicAction extends Action,
+  TReturnTypeConstraint = unknown
 > {
-  dispatcher?: (store: TStore, match: (values: TValues) => TAction, values: TValues, path: string) => void;
-  actionHandler?: (store: TStore, next: (action: TAction | SetUrlAction | SetUrlRouteAction) => TReturnType, action: TAction | SetUrlAction | SetUrlRouteAction) => TReturnType;
+  dispatcher?: (
+    store: { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint> },
+    match: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>,
+    values: TValues,
+    path: string
+  ) => void;
+  actionHandler?: <TAction, TReturnType>(next: (action: TAction) => TReturnType, action: TAction) => TReturnType;
   urlSupport?: (onChange: (url: string) => void) => UrlSupport;
 }
 
 declare function createActionRouterMiddleware<
-  TBasicAction extends Action,
-  TReturnType,
-  TState,
-  TExtraThunkArg,
-  TStore extends Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> } = Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> },
+  TState = {},
+  TExtraThunkArg = undefined,
+  TBasicAction extends Action = AnyAction,
+  TReturnTypeConstraint = unknown,
   TValues = any
->(routes: RoutesMap<TBasicAction, TReturnType, TState, TExtraThunkArg, TValues>, opts: ActionRouterOpts<TState, TBasicAction, TStore, TReturnType, TValues>): Middleware<
-  ThunkDispatch<TState, TExtraThunkArg, TBasicAction | SetUrlAction | SetUrlRouteAction>,
+>(
+  routes: RoutesMap<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TValues>,
+  opts: ActionRouterOpts<TValues, TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>
+): Middleware<
+  ThunkDispatch<TState, TExtraThunkArg, TBasicAction>,
   TState,
   ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
 >;

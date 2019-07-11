@@ -39,7 +39,7 @@ export default function createActionRouterMiddleware(routes, opts) {
       }
     }
     urlSupport = options.urlSupport(onChange);
-    return next => action => options.actionHandler(store, next, action);
+    return next => action => options.actionHandler(next, action);
   };
   return middleware;
 }
@@ -48,7 +48,7 @@ export function processCurrentUrl() {
   return urlSupport.processUrl();
 }
 
-export function actionHandler(store, next, action) {
+export function actionHandler(next, action) {
   if (action && action.type === 'setUrl') {
     urlSupport.setUrl(action.url);
   } else if (action && action.type === 'setUrlRoute') {

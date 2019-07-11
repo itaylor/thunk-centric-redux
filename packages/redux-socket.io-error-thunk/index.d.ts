@@ -1,6 +1,6 @@
 import ExtendableError from 'es6-error';
-import { Action, Middleware } from 'redux';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk-recursion-detect';
+import { Middleware } from 'redux';
+import { ThunkDispatch } from 'redux-thunk-recursion-detect';
 
 export interface IoError extends ExtendableError {
   message: string;
@@ -11,15 +11,10 @@ export interface IoErrorSocket {
   on(eventName: string, listener: Function): void;
 }
 
-declare function createIoErrorMiddleware<
-  TBasicAction extends Action,
-  TReturnType,
-  TState,
-  TExtraThunkArg,
->(socket: IoErrorSocket, opts?: { eventsToThrow: string[] }): Middleware<
+declare function createIoErrorMiddleware<TState = {}>(socket: IoErrorSocket, opts?: { eventsToThrow: string[] }): Middleware<
     {},
     TState,
-    ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
+    ThunkDispatch<TState, any, any, any>
   >;
 
 export default createIoErrorMiddleware;

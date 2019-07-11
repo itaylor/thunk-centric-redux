@@ -1,4 +1,4 @@
-import { Action, Middleware } from 'redux';
+import { Action, Middleware, AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk-recursion-detect';
 
 export interface IoMessageSocket {
@@ -6,28 +6,28 @@ export interface IoMessageSocket {
 }
 
 export interface IoMessageHandlers<
-  TBasicAction extends Action,
-  TReturnType,
   TState,
   TExtraThunkArg,
+  TBasicAction extends Action,
+  TReturnTypeContraint = unknown
 > {
-  [type: string]: (message: any) => TBasicAction | ThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction>;
+  [type: string]: (message: any) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeContraint>;
 }
 
 declare function createIoMessageMiddleware<
-  TBasicAction extends Action,
-  TReturnType,
-  TState,
-  TExtraThunkArg,
+  TState = {},
+  TBasicAction extends Action = AnyAction,
+  TExtraThunkArg = undefined,
+  TReturnTypeContraint = unknown,
 >(socket: IoMessageSocket, ioMessageHandlers: IoMessageHandlers<
-    TBasicAction,
-    TReturnType,
     TState,
-    TExtraThunkArg
+    TExtraThunkArg,
+    TBasicAction,
+    TReturnTypeContraint
   >, opts?: { eventName: string }): Middleware<
     {},
     TState,
-    ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
+    ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeContraint>
   >;
 
 export default createIoMessageMiddleware;
