@@ -9,7 +9,7 @@ export declare function awaitableThunk<
   TReturnTypeConstraint,
   TReturnType extends TReturnTypeConstraint,
 >(name: TName, thunk: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>):
-  Required<AwaitableThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType, TName>>;
+  Required<AwaitableThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType, TName, TName>>;
 
 export declare function after(name: string): Promise<void>;
 export declare function afterExactly(name: string, nCalls: number): Promise<void>;
@@ -23,14 +23,15 @@ export interface AwaitableThunkAction<
   TBasicAction extends Action,
   TReturnTypeConstraint = unknown,
   TReturnType extends TReturnTypeConstraint = TReturnTypeConstraint,
-  TAwaitableNames extends string = string
+  TAwaitableNames extends string = string,
+  TName extends TAwaitableNames = TAwaitableNames,
 > extends ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType> {
   (
     dispatch: AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TAwaitableNames>,
     getState: () => TState,
     extraArgument: TExtraThunkArg
   ): TReturnType;
-  awaitableThunk?: TAwaitableNames;
+  awaitableThunk?: TName;
 }
 
 export interface AwaitableThunkDispatch<
@@ -40,8 +41,8 @@ export interface AwaitableThunkDispatch<
   TReturnTypeConstraint = unknown,
   TAwaitableNames extends string = string,
 > extends ThunkDispatch<TState, TExtraThunkArg, TBasicAction> {
-  <TReturnType extends TReturnTypeConstraint>(
-    thunkAction: AwaitableThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType, TAwaitableNames>
+  <TReturnType extends TReturnTypeConstraint, TName extends TAwaitableNames>(
+    thunkAction: AwaitableThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType, TAwaitableNames, TName>
   ): TReturnType;
   <A extends TBasicAction>(action: A): A;
 }
