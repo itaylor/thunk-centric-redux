@@ -5,20 +5,18 @@ declare function createThunkErrorCatchMiddleware<
   TState = {},
   TExtraThunkArg = undefined,
   TBasicAction extends Action = AnyAction,
-  TReturnTypeConstraint = unknown,
->(config: { onError(error: unknown): TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint> | void }): Middleware<
+>(config: { onError(error: unknown): TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown> | void }): Middleware<
   {},
   TState,
-  ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>
+  ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
 >;
 
 export declare function forceHandleError<
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  TReturnTypeConstraint = unknown,
-  TReturnType extends TReturnTypeConstraint = TReturnTypeConstraint
->(thunkFn: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType>): ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType>; 
+  TReturnType 
+>(thunkFn: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>): ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>; 
 
 export declare const handleErrorsSymbol: symbol;
 export default createThunkErrorCatchMiddleware;

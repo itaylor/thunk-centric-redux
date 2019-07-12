@@ -9,25 +9,22 @@ export interface IoMessageHandlers<
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  TReturnTypeContraint = unknown
 > {
-  [type: string]: (message: any) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeContraint>;
+  [type: string]: (message: any) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>;
 }
 
 declare function createIoMessageMiddleware<
   TState = {},
   TBasicAction extends Action = AnyAction,
   TExtraThunkArg = undefined,
-  TReturnTypeContraint = unknown,
 >(socket: IoMessageSocket, ioMessageHandlers: IoMessageHandlers<
     TState,
     TExtraThunkArg,
-    TBasicAction,
-    TReturnTypeContraint
+    TBasicAction
   >, opts?: { eventName: string }): Middleware<
     {},
     TState,
-    ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeContraint>
+    ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
   >;
 
 export default createIoMessageMiddleware;

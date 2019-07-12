@@ -8,7 +8,7 @@ export declare function awaitableThunk<
   TName extends string,
   TReturnTypeConstraint,
   TReturnType extends TReturnTypeConstraint,
->(name: TName, thunk: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType>):
+>(name: TName, thunk: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>):
   Required<AwaitableThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType, TName>>;
 
 export declare function after(name: string): Promise<void>;
@@ -24,7 +24,7 @@ export interface AwaitableThunkAction<
   TReturnTypeConstraint = unknown,
   TReturnType extends TReturnTypeConstraint = TReturnTypeConstraint,
   TAwaitableNames extends string = string
-> extends ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType> {
+> extends ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType> {
   (
     dispatch: AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TAwaitableNames>,
     getState: () => TState,
@@ -39,8 +39,8 @@ export interface AwaitableThunkDispatch<
   TBasicAction extends Action,
   TReturnTypeConstraint = unknown,
   TAwaitableNames extends string = string,
-> extends ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint> {
-  <TReturnType>(
+> extends ThunkDispatch<TState, TExtraThunkArg, TBasicAction> {
+  <TReturnType extends TReturnTypeConstraint>(
     thunkAction: AwaitableThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType, TAwaitableNames>
   ): TReturnType;
   <A extends TBasicAction>(action: A): A;

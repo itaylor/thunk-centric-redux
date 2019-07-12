@@ -1,4 +1,4 @@
-import { Store, AnyAction, Action, Middleware } from 'redux';
+import { AnyAction, Action, Middleware, Store } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk-recursion-detect';
 
 export interface SetUrlAction {
@@ -13,17 +13,24 @@ export interface SetUrlRouteAction {
 
 export declare function processCurrentUrl(): void;
 
-export declare function actionHandler<TAction, TReturnType>(next: (action: TAction) => TReturnType, action: TAction): TReturnType;
+export declare function actionHandler<
+  TState = {},
+  TExtraThunkArg = undefined,
+  TBasicAction extends Action = AnyAction,
+  TAction extends TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown> = TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>,
+  TReturnType = unknown,
+  TStore extends Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> } = 
+    Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> }
+>(store: TStore, next: (action: TAction) => TReturnType, action: TAction): TReturnType;
 
 export declare function dispatcher<
   TValues,
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  TReturnTypeConstraint = unknown
 >(
-  store: { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint> },
-  match: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>,
+  store: { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> },
+  match: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>,
   values: TValues,
   path: string
 ): void;
@@ -32,10 +39,9 @@ export interface RoutesMap<
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  TReturnTypeConstraint = unknown,
   TValues = any
 > {
-  [url: string]: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>;
+  [url: string]: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>;
 }
 
 export interface UrlSupport {
@@ -49,15 +55,19 @@ export interface ActionRouterOpts<
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  TReturnTypeConstraint = unknown
+  TStore extends Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> } = 
+    Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> }
 > {
   dispatcher?: (
-    store: { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint> },
-    match: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>,
+    store: TStore,
+    match: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>,
     values: TValues,
     path: string
   ) => void;
-  actionHandler?: <TAction, TReturnType>(next: (action: TAction) => TReturnType, action: TAction) => TReturnType;
+  actionHandler?: <
+    TAction extends TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown> = TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>,
+    TReturnType = unknown,
+  >(store: TStore, next: (action: TAction) => TReturnType, action: TAction) => TReturnType;
   urlSupport?: (onChange: (url: string) => void) => UrlSupport;
 }
 
@@ -65,11 +75,12 @@ declare function createActionRouterMiddleware<
   TState = {},
   TExtraThunkArg = undefined,
   TBasicAction extends Action = AnyAction,
-  TReturnTypeConstraint = unknown,
-  TValues = any
+  TValues = any,
+  TStore extends Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> } = 
+    Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> }
 >(
-  routes: RoutesMap<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TValues>,
-  opts: ActionRouterOpts<TValues, TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>
+  routes: RoutesMap<TState, TExtraThunkArg, TBasicAction, TValues>,
+  opts: ActionRouterOpts<TValues, TState, TExtraThunkArg, TBasicAction, TStore>
 ): Middleware<
   ThunkDispatch<TState, TExtraThunkArg, TBasicAction>,
   TState,

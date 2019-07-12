@@ -14,7 +14,7 @@ export interface IoErrorSocket {
 declare function createIoErrorMiddleware<TState = {}>(socket: IoErrorSocket, opts?: { eventsToThrow: string[] }): Middleware<
     {},
     TState,
-    ThunkDispatch<TState, any, any, any>
+    ThunkDispatch<TState, any, any>
   >;
 
 export default createIoErrorMiddleware;

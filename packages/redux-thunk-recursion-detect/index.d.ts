@@ -23,10 +23,9 @@ export interface ThunkDispatch<
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  TReturnTypeConstraint = unknown
 > {
-  <TReturnType extends TReturnTypeConstraint>(
-    thunkAction: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType>
+  <TReturnType>(
+    thunkAction: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>
   ): TReturnType;
   <A extends TBasicAction>(action: A): A;
 }
@@ -50,10 +49,9 @@ export type ThunkAction<
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  TReturnTypeConstraint = unknown,
-  TReturnType extends TReturnTypeConstraint = TReturnTypeConstraint
+  TReturnType
 > = (
-  dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>,
+  dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction>,
   getState: () => TState,
   extraArgument: TExtraThunkArg
 ) => TReturnType;
@@ -84,11 +82,10 @@ export type ThunkMiddleware<
   TState = {},
   TBasicAction extends Action = AnyAction,
   TExtraThunkArg = undefined,
-  TReturnTypeConstraint = unknown
 > = Middleware<
-  ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>,
+  ThunkDispatch<TState, TExtraThunkArg, TBasicAction>,
   TState,
-  ThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint>
+  ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
 >;
 
 declare const thunk: ThunkMiddleware & {
