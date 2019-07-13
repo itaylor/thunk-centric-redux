@@ -50,6 +50,14 @@ export function afterExactly(name, nCalls) {
   return afterNCalls(name, nCalls, false);
 }
 
+export function afterAnother(name) {
+  return afterAnotherExactly(name, 1);
+}
+
+export function afterAnotherExactly(name, nCalls) {
+  return afterNCalls(name, thunkState.completeCount[name] + nCalls, false);
+}
+
 export function inProgress(name) {
   if (isInProgress(name)) {
     return afterNCalls(name, thunkState.completeCount[name] + 1, false);
