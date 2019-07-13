@@ -122,7 +122,7 @@ describe('awaitableThunks', () => {
     expect(listener.mock.calls.length).toBe(5);
   });
 
-  test('"afterAnother" runs only if namedSimpleThunk is called 1 more times after afterAnotherExactly', async () => {
+  test('"afterAnother" runs only if namedSimpleThunk is called 1 more times after afterAnother', async () => {
     const store = createStoreWithMiddleware(simpleReducer);
     const listener = jest.fn();
     store.subscribe(listener);
