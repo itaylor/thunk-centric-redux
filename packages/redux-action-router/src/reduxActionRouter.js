@@ -1,14 +1,19 @@
 import urlMapper from 'url-mapper';
 import querystring from 'querystring';
 import hashchangeSupport from './hashchangeSupport.js';
+import urlchangeSupport from './urlchangeSupport.js';
 
 let urlSupport;
 
-export default function createActionRouterMiddleware(routes, opts) {
+function urlResolver(hashOnly = true) {
+  return hashOnly ? hashchangeSupport : urlchangeSupport;
+}
+
+export default function createActionRouterMiddleware(routes, opts = {}) {
   const options = {
     dispatcher,
     actionHandler,
-    urlSupport: hashchangeSupport,
+    urlSupport: urlResolver(opts.hashOnly),
     ...opts,
   };
   if (urlSupport) {
@@ -38,7 +43,7 @@ export default function createActionRouterMiddleware(routes, opts) {
         options.dispatcher(store, match, values, path);
       }
     }
-    urlSupport = options.urlSupport(onChange);
+    urlSupport = options.urlSupport(onChange, urlActionMap);
     return next => action => options.actionHandler(store, next, action);
   };
   return middleware;
@@ -51,7 +56,7 @@ export function processCurrentUrl() {
 export function actionHandler(store, next, action) {
   if (action && action.type === 'setUrl') {
     urlSupport.setUrl(action.url);
-  } else if (action && action.type === 'setUrlRoute') {
+  } else if (action &&  action.type === 'setUrlRoute') {
     urlSupport.setUrl(action.url);
     processCurrentUrl();
   }
