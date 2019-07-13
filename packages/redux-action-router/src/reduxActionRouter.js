@@ -56,7 +56,7 @@ export function processCurrentUrl() {
 export function actionHandler(store, next, action) {
   if (action && action.type === 'setUrl') {
     urlSupport.setUrl(action.url);
-  } else if (action &&  action.type === 'setUrlRoute') {
+  } else if (action && action.type === 'setUrlRoute') {
     urlSupport.setUrl(action.url);
     processCurrentUrl();
   }
