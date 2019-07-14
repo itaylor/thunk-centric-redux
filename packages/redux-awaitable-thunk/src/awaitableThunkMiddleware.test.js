@@ -6,8 +6,8 @@ import awaitableThunkMiddleware, {
   after,
   resetThunkState,
   afterExactly,
-  afterAnother,
-  afterAnotherExactly,
+  next,
+  more,
 } from './awaitableThunkMiddleware.js';
 
 const createStoreWithMiddleware = applyMiddleware(awaitableThunkMiddleware, thunkMiddleware)(createStore);
@@ -106,14 +106,14 @@ describe('awaitableThunks', () => {
     expect(listener.mock.calls.length).toBe(5);
   });
 
-  test('"afterAnotherExactly" runs only if namedSimpleThunk is called N more times after afterAnotherExactly', async () => {
+  test('"more" runs only if namedSimpleThunk is called N more times after more', async () => {
     const store = createStoreWithMiddleware(simpleReducer);
     const listener = jest.fn();
     store.subscribe(listener);
     await store.dispatch(namedSimpleThunk());
     await store.dispatch(namedSimpleThunk());
     store.dispatch(async (dispatch) => {
-      await afterAnotherExactly('namedSimpleThunk', 2);
+      await more('namedSimpleThunk', 2);
       dispatch({ type: 'action2' });
     });
     await store.dispatch(namedSimpleThunk());
@@ -122,14 +122,14 @@ describe('awaitableThunks', () => {
     expect(listener.mock.calls.length).toBe(5);
   });
 
-  test('"afterAnother" runs only if namedSimpleThunk is called 1 more times after afterAnother', async () => {
+  test('"next" runs only if namedSimpleThunk is called 1 more times after next', async () => {
     const store = createStoreWithMiddleware(simpleReducer);
     const listener = jest.fn();
     store.subscribe(listener);
     await store.dispatch(namedSimpleThunk());
     await store.dispatch(namedSimpleThunk());
     store.dispatch(async (dispatch) => {
-      await afterAnother('namedSimpleThunk');
+      await next('namedSimpleThunk');
       dispatch({ type: 'action2' });
     });
     await store.dispatch(namedSimpleThunk());

@@ -51,11 +51,11 @@ export function afterExactly(name, nCalls) {
   return afterNCalls(name, nCalls, false);
 }
 
-export function afterAnother(name) {
-  return afterAnotherExactly(name, 1);
+export function next(name) {
+  return more(name, 1);
 }
 
-export function afterAnotherExactly(name, nCalls) {
+export function more(name, nCalls) {
   return afterNCalls(name, thunkState.completeCount[name] + nCalls, false);
 }
 
