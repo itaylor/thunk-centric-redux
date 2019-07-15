@@ -25,7 +25,7 @@ export interface ThunkDispatch<
   TBasicAction extends Action,
 > {
   <TReturnType>(
-    thunkAction: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>
+    thunkAction: ThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction>
   ): TReturnType;
   <A extends TBasicAction>(action: A): A;
 }
@@ -46,10 +46,10 @@ export interface ThunkDispatch<
  * thunk return types
  */
 export type ThunkAction<
+  TReturnType,
   TState,
   TExtraThunkArg,
-  TBasicAction extends Action,
-  TReturnType
+  TBasicAction extends Action
 > = (
   dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction>,
   getState: () => TState,
