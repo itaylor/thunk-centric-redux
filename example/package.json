@@ -1,23 +1,23 @@
 {
   "name": "thunk-centric-redux-example",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
-    "concurrently": "^4.1.0",
+    "concurrently": "^4.1.1",
     "express": "^4.17.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-scripts": "3.0.1",
-    "redux": "^4.0.1",
-    "redux-action-router": "^1.1.0",
-    "redux-awaitable-thunk": "^1.1.0",
-    "redux-socket.io-error-thunk": "^1.2.0",
-    "redux-socket.io-message-thunk": "^1.1.0",
-    "redux-thunk-error-handler": "^1.1.1",
-    "redux-thunk-recursion-detect": "^1.1.1",
+    "redux": "^4.0.3",
+    "redux-action-router": "^1.1.1",
+    "redux-awaitable-thunk": "^1.2.0",
+    "redux-socket.io-error-thunk": "^1.2.1",
+    "redux-socket.io-message-thunk": "^1.1.1",
+    "redux-thunk-error-handler": "^1.1.2",
+    "redux-thunk-recursion-detect": "^1.1.2",
     "socket.io": "^2.2.0",
-    "socket.io-promise": "^1.1.0"
+    "socket.io-promise": "^1.1.1"
   },
   "scripts": {
     "start": "concurrently 'react-scripts start' 'node src/server/server.js'",
