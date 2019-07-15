@@ -1,10 +1,10 @@
 {
   "name": "socket.io-promise",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An opinionated Promise wrapper around socket.io's emit/ack",
   "main": "dist/ioPromise.cjs.js",
   "module": "dist/ioPromise.esm.js",
-  "repository": "https://github.com/itaylor/thunk-centrix-redux.git",
+  "repository": "github:itaylor/thunk-centric-redux",
   "author": "Ian Taylor <ian.b.taylor@gmail.com>",
   "license": "MIT",
   "files": [

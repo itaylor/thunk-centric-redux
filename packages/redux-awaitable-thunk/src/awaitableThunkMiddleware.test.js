@@ -1,7 +1,13 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import awaitableThunkMiddleware, {
-  awaitableThunk, inProgress, after, resetThunkState, afterExactly,
+  awaitableThunk,
+  inProgress,
+  after,
+  resetThunkState,
+  afterExactly,
+  next,
+  more,
 } from './awaitableThunkMiddleware.js';
 
 const createStoreWithMiddleware = applyMiddleware(awaitableThunkMiddleware, thunkMiddleware)(createStore);
@@ -98,6 +104,37 @@ describe('awaitableThunks', () => {
     await store.dispatch(namedSimpleThunk());
     expect(store.getState().inOrderActions).toEqual(['action1', 'action1', 'action1', 'action2', 'action1']);
     expect(listener.mock.calls.length).toBe(5);
+  });
+
+  test('"more" runs only if namedSimpleThunk is called N more times after more', async () => {
+    const store = createStoreWithMiddleware(simpleReducer);
+    const listener = jest.fn();
+    store.subscribe(listener);
+    await store.dispatch(namedSimpleThunk());
+    await store.dispatch(namedSimpleThunk());
+    store.dispatch(async (dispatch) => {
+      await more('namedSimpleThunk', 2);
+      dispatch({ type: 'action2' });
+    });
+    await store.dispatch(namedSimpleThunk());
+    await store.dispatch(namedSimpleThunk());
+    expect(store.getState().inOrderActions).toEqual(['action1', 'action1', 'action1', 'action1', 'action2']);
+    expect(listener.mock.calls.length).toBe(5);
+  });
+
+  test('"next" runs only if namedSimpleThunk is called 1 more times after next', async () => {
+    const store = createStoreWithMiddleware(simpleReducer);
+    const listener = jest.fn();
+    store.subscribe(listener);
+    await store.dispatch(namedSimpleThunk());
+    await store.dispatch(namedSimpleThunk());
+    store.dispatch(async (dispatch) => {
+      await next('namedSimpleThunk');
+      dispatch({ type: 'action2' });
+    });
+    await store.dispatch(namedSimpleThunk());
+    expect(store.getState().inOrderActions).toEqual(['action1', 'action1', 'action1', 'action2']);
+    expect(listener.mock.calls.length).toBe(4);
   });
 });
 
