@@ -16,14 +16,16 @@ import {
  * @template TExtraThunkArg The extra argument passed to the inner function of
  * thunks (if specified when setting up the Thunk middleware)
  * @template TBasicAction The (non-thunk) actions that can be dispatched.
+ * @template TReturnTypeConstraint Gives the ability to restrain the possible
+ * thunk return types
  */
 export interface ThunkDispatch<
   TState,
   TExtraThunkArg,
-  TBasicAction extends Action
+  TBasicAction extends Action,
 > {
   <TReturnType>(
-    thunkAction: ThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction>
+    thunkAction: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>
   ): TReturnType;
   <A extends TBasicAction>(action: A): A;
 }
@@ -40,12 +42,14 @@ export interface ThunkDispatch<
  * @template TExtraThunkARg Optional extra argument passed to the inner function
  * (if specified when setting up the Thunk middleware)
  * @template TBasicAction The (non-thunk) actions that can be dispatched.
+ * @template TReturnTypeConstraint Gives the ability to restrain the possible
+ * thunk return types
  */
 export type ThunkAction<
-  TReturnType,
   TState,
   TExtraThunkArg,
-  TBasicAction extends Action
+  TBasicAction extends Action,
+  TReturnType
 > = (
   dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction>,
   getState: () => TState,
@@ -71,15 +75,17 @@ export type ThunkActionDispatch<
  * @template TBasicAction The (non-thunk) actions that can be dispatched
  * @template TExtraThunkArg An optional extra argument to pass to a thunk's
  * inner function. (Only used if you call `thunk.withExtraArgument()`)
+ * @template TReturnTypeConstraint Gives the ability to restrain the possible
+ * thunk return types
  */
 export type ThunkMiddleware<
   TState = {},
   TBasicAction extends Action = AnyAction,
-  TExtraThunkARg = undefined
+  TExtraThunkArg = undefined,
 > = Middleware<
-  ThunkDispatch<TState, TExtraThunkARg, TBasicAction>,
+  ThunkDispatch<TState, TExtraThunkArg, TBasicAction>,
   TState,
-  ThunkDispatch<TState, TExtraThunkARg, TBasicAction>
+  ThunkDispatch<TState, TExtraThunkArg, TBasicAction>
 >;
 
 declare const thunk: ThunkMiddleware & {

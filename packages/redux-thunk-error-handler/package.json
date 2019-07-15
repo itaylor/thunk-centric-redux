@@ -34,14 +34,14 @@
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
   "peerDependencies": {
-    "redux": "^4.0.1"
+    "redux": "^4.0.3"
   },
   "devDependencies": {
     "@babel/register": "^7.4.4",
     "expect": "^24.8.0",
     "jest": "^24.8.0",
     "mocha": "^6.1.4",
-    "redux": "^4.0.1",
+    "redux": "^4.0.3",
     "rollup": "^1.15.3"
   },
   "dependencies": {

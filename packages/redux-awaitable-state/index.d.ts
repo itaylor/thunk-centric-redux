@@ -1,4 +1,4 @@
-import { AnyAction, Store } from 'redux';
+import { Store } from 'redux';
 
 export declare function stateMatch<TState>(evalFn: (state: TState) => boolean): Promise<void>;
 export declare function futureStateMatch<TState>(evalFn: (state: TState) => boolean): Promise<void>;

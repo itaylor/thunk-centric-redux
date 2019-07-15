@@ -2,13 +2,14 @@ import { Action, Middleware, AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk-recursion-detect';
 
 export declare function awaitableThunk<
-  Name extends string,
-  TBasicAction extends Action,
-  TReturnType,
   TState,
   TExtraThunkArg,
->(name: Name, thunk: ThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction>):
-  Required<AwaitableThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction, Name>>;
+  TBasicAction extends Action,
+  TName extends string,
+  TReturnTypeConstraint,
+  TReturnType extends TReturnTypeConstraint,
+>(name: TName, thunk: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>):
+  Required<AwaitableThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType, TName, TName>>;
 
 export declare function after(name: string): Promise<void>;
 export declare function afterExactly(name: string, nCalls: number): Promise<void>;
@@ -19,39 +20,43 @@ export declare function isInProgress(name: string): boolean;
 export declare function resetThunkState(): void;
 
 export interface AwaitableThunkAction<
-  TReturnType,
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  AwaitableNames extends string = string
-> extends ThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction> {
+  TReturnTypeConstraint = unknown,
+  TReturnType extends TReturnTypeConstraint = TReturnTypeConstraint,
+  TAwaitableNames extends string = string,
+  TName extends TAwaitableNames = TAwaitableNames,
+> extends ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType> {
   (
-    dispatch: AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, AwaitableNames>,
+    dispatch: AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TAwaitableNames>,
     getState: () => TState,
     extraArgument: TExtraThunkArg
   ): TReturnType;
-  awaitableThunk?: AwaitableNames
+  awaitableThunk?: TName;
 }
 
 export interface AwaitableThunkDispatch<
   TState,
   TExtraThunkArg,
   TBasicAction extends Action,
-  AwaitableNames extends string = string,
+  TReturnTypeConstraint = unknown,
+  TAwaitableNames extends string = string,
 > extends ThunkDispatch<TState, TExtraThunkArg, TBasicAction> {
-  <TReturnType>(
-    thunkAction: AwaitableThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction, AwaitableNames>
+  <TReturnType extends TReturnTypeConstraint, TName extends TAwaitableNames>(
+    thunkAction: AwaitableThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TReturnType, TAwaitableNames, TName>
   ): TReturnType;
   <A extends TBasicAction>(action: A): A;
 }
 
 export type AwaitableThunkMiddleware<
-  TState = unknown,
+  TState = {},
   TExtraThunkArg = undefined,
   TBasicAction extends Action = AnyAction,
-  AwaitableNames extends string = string,
+  TReturnTypeConstraint = unknown,
+  TAwaitableNames extends string = string,
 > = Middleware<
-  AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, AwaitableNames>,
+  AwaitableThunkDispatch<TState, TExtraThunkArg, TBasicAction, TReturnTypeConstraint, TAwaitableNames>,
   TState
 >;
 
