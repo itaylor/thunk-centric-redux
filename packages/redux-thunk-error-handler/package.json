@@ -1,6 +1,6 @@
 {
   "name": "redux-thunk-error-handler",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "An error handler for thunks that, when used in conjunction with `redux-thunk-recursion-detect` can handle errors thrown in both async and sync thunks gracefully.",
   "main": "dist/reduxThunkErrorHandler.cjs.js",
   "module": "dist/reduxThunkErrorHandler.esm.js",
@@ -45,6 +45,6 @@
     "rollup": "^1.15.3"
   },
   "dependencies": {
-    "redux-thunk-recursion-detect": "^1.1.1"
+    "redux-thunk-recursion-detect": "^1.1.2"
   }
 }
