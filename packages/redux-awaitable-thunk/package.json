@@ -28,7 +28,7 @@
   ],
   "peerDependencies": {
     "redux": "^4.0.3",
-    "redux-thunk-recursion-detect": "^1.1.0"
+    "redux-thunk-recursion-detect": "^1.1.1"
   },
   "author": "ian.b.taylor@gmail.com",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "jest": "^24.8.0",
     "redux": "^4.0.3",
     "redux-thunk": "^2.3.0",
-    "redux-thunk-recursion-detect": "^1.1.0",
+    "redux-thunk-recursion-detect": "1.1.1",
     "rollup": "^1.15.3"
   }
 }
