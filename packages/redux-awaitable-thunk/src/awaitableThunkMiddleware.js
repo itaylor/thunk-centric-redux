@@ -26,6 +26,7 @@ export function awaitableThunk(name, thunk) {
   return thunk;
 }
 
+
 function afterNCalls(name, nCalls, orMore = false) {
   let resolve;
   let reject;
@@ -48,6 +49,14 @@ export function after(name) {
 
 export function afterExactly(name, nCalls) {
   return afterNCalls(name, nCalls, false);
+}
+
+export function next(name) {
+  return more(name, 1);
+}
+
+export function more(name, nCalls) {
+  return afterNCalls(name, thunkState.completeCount[name] + nCalls, false);
 }
 
 export function inProgress(name) {

@@ -81,6 +81,12 @@ Returns a promise that will resolve when the named thunk has finished running at
 `afterExactly(name: String, nCalls: Number): Promise`
 Returns a promise that will resolve when the number of finished calls of that name has happened exactly nCalls times.  Will *not* resolve if the number of calls is already greater than `nCalls`.
 
+`next(name: String): Promise`
+Returns a promise that will resolve when the named thunk has finished running one more time than it has already run. Useful when it is not known how many times the awaitableThunk has already run.
+
+`more(name: String, nCalls: Number): Promise`
+Returns a promise that will resolve when the named thunk has finished running N more times than it has already run. Useful when it is not known how many times the awaitableThunk has already run.
+
 
 ## A part of the [thunk-centric-redux](//github.com/itaylor/thunk-centric-redux) set of tools
 This library is part of a larger set of tools that can be helpful for making thunk-centric Redux applications.  [Visit that project](//github.com/itaylor/thunk-centric-redux) to see a runnable example app that makes use of this code in context.

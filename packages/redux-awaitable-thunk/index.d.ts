@@ -12,6 +12,8 @@ export declare function awaitableThunk<
 
 export declare function after(name: string): Promise<void>;
 export declare function afterExactly(name: string, nCalls: number): Promise<void>;
+export declare function next(name: string): Promise<void>;
+export declare function more(name: string, nCalls: number): Promise<void>;
 export declare function inProgress(name: string): Promise<void>;
 export declare function isInProgress(name: string): boolean;
 export declare function resetThunkState(): void;
