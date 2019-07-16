@@ -1,6 +1,6 @@
 {
   "name": "redux-awaitable-state",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A utility that allows you to await a future state a redux store, allowing for complex flow control within thunks.",
   "main": "dist/awaitableState.cjs.js",
   "module": "dist/awaitableState.esm.js",
