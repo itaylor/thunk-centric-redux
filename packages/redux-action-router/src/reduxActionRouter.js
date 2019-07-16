@@ -5,12 +5,11 @@ import hashchangeSupport from './hashchangeSupport.js';
 let urlSupport;
 
 export default function createActionRouterMiddleware(routes, opts) {
-  const options = {
+  const options = Object.assign({
     dispatcher,
     actionHandler,
     urlSupport: hashchangeSupport,
-    ...opts,
-  };
+  }, opts);
   if (urlSupport) {
     urlSupport.cleanUp();
   }
@@ -30,10 +29,7 @@ export default function createActionRouterMiddleware(routes, opts) {
         const { match } = matched;
         if (query) {
           const parsedQuery = querystring.parse(query);
-          values = {
-            ...parsedQuery,
-            ...values,
-          };
+          values = Object.assign({}, parsedQuery, values);
         }
         options.dispatcher(store, match, values, path);
       }
