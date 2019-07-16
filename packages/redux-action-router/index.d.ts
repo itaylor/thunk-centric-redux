@@ -17,7 +17,7 @@ export declare function actionHandler<
   TState = {},
   TExtraThunkArg = undefined,
   TBasicAction extends Action = AnyAction,
-  TAction extends TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown> = TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>,
+  TAction extends TBasicAction | ThunkAction<unknown, TState, TExtraThunkArg, TBasicAction> = TBasicAction | ThunkAction<unknown, TState, TExtraThunkArg, TBasicAction>,
   TReturnType = unknown,
   TStore extends Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> } = 
     Store<TState, TBasicAction> & { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> }
@@ -30,7 +30,7 @@ export declare function dispatcher<
   TBasicAction extends Action,
 >(
   store: { dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction> },
-  match: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>,
+  match: (values: TValues) => TBasicAction | ThunkAction<unknown, TState, TExtraThunkArg, TBasicAction>,
   values: TValues,
   path: string
 ): void;
@@ -41,7 +41,7 @@ export interface RoutesMap<
   TBasicAction extends Action,
   TValues = any
 > {
-  [url: string]: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>;
+  [url: string]: (values: TValues) => TBasicAction | ThunkAction<unknown, TState, TExtraThunkArg, TBasicAction>;
 }
 
 export interface UrlSupport {
@@ -60,12 +60,12 @@ export interface ActionRouterOpts<
 > {
   dispatcher?: (
     store: TStore,
-    match: (values: TValues) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>,
+    match: (values: TValues) => TBasicAction | ThunkAction<unknown, TState, TExtraThunkArg, TBasicAction>,
     values: TValues,
     path: string
   ) => void;
   actionHandler?: <
-    TAction extends TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown> = TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>,
+    TAction extends TBasicAction | ThunkAction<unknown, TState, TExtraThunkArg, TBasicAction> = TBasicAction | ThunkAction<unknown, TState, TExtraThunkArg, TBasicAction>,
     TReturnType = unknown,
   >(store: TStore, next: (action: TAction) => TReturnType, action: TAction) => TReturnType;
   urlSupport?: (onChange: (url: string) => void) => UrlSupport;

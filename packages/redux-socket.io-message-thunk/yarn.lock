@@ -2611,10 +2611,10 @@ realpath-native@^1.1.0:
   dependencies:
     util.promisify "^1.0.0"
 
-redux-thunk-recursion-detect@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/redux-thunk-recursion-detect/-/redux-thunk-recursion-detect-1.1.1.tgz#7f1b13d0442bc287f37bb46e2d6943dab13d0f00"
-  integrity sha512-s50xHim5GJJQ1s5ZFXx43ZxP1L7041Fa/ZkDn+MKvmsWd0oP7wCjQPjX3LUu6fUrlyKdY1hS60cQcMV53nvC3g==
+redux-thunk-recursion-detect@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk-recursion-detect/-/redux-thunk-recursion-detect-1.1.0.tgz#b61c347d04dfb5c9acf5c3764691b305b321300c"
+  integrity sha512-uI5VltNx4Rkr/2LrfN8vFLW7nRuaeeAM+S+gCiqbW7uYEvlJiKWY2fMMyes9Rh7FbaC6NxA3caPGNIRkJjW1lw==
 
 redux@^4.0.3:
   version "4.0.3"

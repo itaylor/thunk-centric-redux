@@ -10,7 +10,7 @@ export interface IoMessageHandlers<
   TExtraThunkArg,
   TBasicAction extends Action,
 > {
-  [type: string]: (message: any) => TBasicAction | ThunkAction<TState, TExtraThunkArg, TBasicAction, unknown>;
+  [type: string]: (message: any) => TBasicAction | ThunkAction<unknown, TState, TExtraThunkArg, TBasicAction>;
 }
 
 declare function createIoMessageMiddleware<

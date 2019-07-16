@@ -16,8 +16,6 @@ import {
  * @template TExtraThunkArg The extra argument passed to the inner function of
  * thunks (if specified when setting up the Thunk middleware)
  * @template TBasicAction The (non-thunk) actions that can be dispatched.
- * @template TReturnTypeConstraint Gives the ability to restrain the possible
- * thunk return types
  */
 export interface ThunkDispatch<
   TState,
@@ -25,7 +23,7 @@ export interface ThunkDispatch<
   TBasicAction extends Action,
 > {
   <TReturnType>(
-    thunkAction: ThunkAction<TState, TExtraThunkArg, TBasicAction, TReturnType>
+    thunkAction: ThunkAction<TReturnType, TState, TExtraThunkArg, TBasicAction>
   ): TReturnType;
   <A extends TBasicAction>(action: A): A;
 }
@@ -42,14 +40,12 @@ export interface ThunkDispatch<
  * @template TExtraThunkARg Optional extra argument passed to the inner function
  * (if specified when setting up the Thunk middleware)
  * @template TBasicAction The (non-thunk) actions that can be dispatched.
- * @template TReturnTypeConstraint Gives the ability to restrain the possible
- * thunk return types
  */
 export type ThunkAction<
+  TReturnType,
   TState,
   TExtraThunkArg,
-  TBasicAction extends Action,
-  TReturnType
+  TBasicAction extends Action
 > = (
   dispatch: ThunkDispatch<TState, TExtraThunkArg, TBasicAction>,
   getState: () => TState,
