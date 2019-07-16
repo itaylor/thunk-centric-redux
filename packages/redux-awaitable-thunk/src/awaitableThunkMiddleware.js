@@ -2,14 +2,14 @@ let thunkState;
 resetThunkState();
 
 export default function awaitableThunkMiddleware() {
-  return next => async (action) => { // eslint-disable-line no-unused-vars
+  return nextArg => async (action) => { // eslint-disable-line no-unused-vars
     if (action.awaitableThunk && typeof action === 'function') {
       const name = action.awaitableThunk;
       thunkState.inProgress[name] = (thunkState.inProgress[name] || 0) + 1;
       thunkState.completeCount[name] = thunkState.completeCount[name] || 0;
       let result;
       try {
-        result = await next(action);
+        result = await nextArg(action);
       } finally {
         thunkState.inProgress[name]--;
         thunkState.completeCount[name]++;
@@ -17,7 +17,7 @@ export default function awaitableThunkMiddleware() {
       }
       return result;
     }
-    return next(action);
+    return nextArg(action);
   };
 }
 
