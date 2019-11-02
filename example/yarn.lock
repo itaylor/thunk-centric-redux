@@ -2596,7 +2596,7 @@ compressible@~2.0.13:
 
 compression@^1.5.2:
   version "1.7.2"
-  resolved "http://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
+  resolved "https://registry.npmjs.org/compression/-/compression-1.7.2.tgz#aaffbcd6aaf854b44ebb280353d5ad1651f59a69"
   dependencies:
     accepts "~1.3.4"
     bytes "3.0.0"
@@ -3502,6 +3502,11 @@ es-to-primitive@^1.2.0:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
+es6-error@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/es6-error/-/es6-error-4.1.1.tgz#9e3af407459deed47e9a91f9b885a84eb05c561d"
+  integrity sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==
+
 escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
@@ -3628,14 +3633,16 @@ eslint-scope@^4.0.0, eslint-scope@^4.0.3:
     estraverse "^4.1.1"
 
 eslint-utils@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/eslint-utils/-/eslint-utils-1.3.1.tgz#9a851ba89ee7c460346f97cf8939c7298827e512"
-  integrity sha512-Z7YjnIldX+2XMcjr7ZkgEsOj/bREONV60qYeB/bjMAqqqZ4zxKyWX+BOUkdmRmA9riiIPVvo5x86m5elviOk0Q==
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/eslint-utils/-/eslint-utils-1.4.3.tgz#74fec7c54d0776b6f67e0251040b5806564e981f"
+  integrity sha512-fbBN5W2xdY45KulGXmLHZ3c3FHfVYmKg0IrAKGOkT/464PQsx2UeIzfz1RmEci+KLm1bBaAzZAh8+/E+XAeZ8Q==
+  dependencies:
+    eslint-visitor-keys "^1.1.0"
 
-eslint-visitor-keys@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
-  integrity sha512-qzm/XxIbxm/FHyH341ZrbnMUpe+5Bocte9xkmFMzPMjRaZMcXww+MpBptFvtU+79L362nqiLhekCxCxDPaUMBQ==
+eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.1.0.tgz#e2a82cea84ff246ad6fb57f9bde5b46621459ec2"
+  integrity sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
 
 eslint@^5.16.0:
   version "5.16.0"
@@ -6848,6 +6855,11 @@ path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
 
+path-to-regexp@^2.1.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-2.4.0.tgz#35ce7f333d5616f1c1e1bfe266c3aba2e5b2e704"
+  integrity sha512-G6zHoVqC6GGTQkZwF4lkuEyMbVOjoBKAEybQUypI1WTkqinCOrq2x6U2+phkJ1XsEMTy4LjtwPI7HW+NVrRR2w==
+
 path-type@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-2.0.0.tgz#f012ccb8415b7096fc2daa1054c3d72389594c73"
@@ -8069,6 +8081,47 @@ recursive-readdir@2.2.2:
   dependencies:
     minimatch "3.0.4"
 
+redux-action-router@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/redux-action-router/-/redux-action-router-1.1.2.tgz#8f16804a8d0ae0dce1abf245f2fc542d86a17599"
+  integrity sha512-sTq6TzsgUQaT7W1zeX6IqZz/zRNlxUthwpkB5Tyv7SgUu0llqILKuDMEC8BD790O4LZ84SkT+gLuNdBsTqkA3Q==
+  dependencies:
+    url-mapper "^2.0.0"
+
+redux-awaitable-thunk@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/redux-awaitable-thunk/-/redux-awaitable-thunk-1.2.1.tgz#4a3742125539e937382ec48bf7a38059dd084f62"
+  integrity sha512-toPqGG2ZNW40Qa3Yjn6wKGvyord+ct4QMOmwESQL41FubhnwY/hZCVH6MB1oc8ya71ukvaaMWPWj4LdYNYNfxQ==
+
+redux-socket.io-error-thunk@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/redux-socket.io-error-thunk/-/redux-socket.io-error-thunk-1.2.2.tgz#89ee661205f7f58c86bc8328389f09db7c9499ba"
+  integrity sha512-U8EJEFZ7UXzJlUYcTjrL8y3GVZEtYElykY1LeVQvAI+gKL694DRe3C8U/Vx/EQJxdCD3A+jywV4RrUjqkvkRYQ==
+  dependencies:
+    es6-error "^4.1.1"
+
+redux-socket.io-message-thunk@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/redux-socket.io-message-thunk/-/redux-socket.io-message-thunk-1.1.2.tgz#ba8eea2bfdfbef331e4e53b8d3a47a98eed55c97"
+  integrity sha512-Jj2XEjfN2dEOrJsd0vLajplj17VLQdLxpy9788x6YfGkL1Irmtn+6+VOV/8PYdGuMjQlvzzvRcSRQQxZZhoo/w==
+
+redux-thunk-error-handler@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/redux-thunk-error-handler/-/redux-thunk-error-handler-1.1.3.tgz#ca1452dc418c4daa577f5bf5e3b32093e5b1607a"
+  integrity sha512-14+oUwPSITS6uImKfD/G9jQ+Ju2fGXtUdKj3hRgyhzAx4wRSuh0/juraL/8IPX2vVsz/3j8fW7pnS4oqjEnOsg==
+  dependencies:
+    redux-thunk-recursion-detect "1.1.1"
+
+redux-thunk-recursion-detect@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/redux-thunk-recursion-detect/-/redux-thunk-recursion-detect-1.1.1.tgz#7f1b13d0442bc287f37bb46e2d6943dab13d0f00"
+  integrity sha512-s50xHim5GJJQ1s5ZFXx43ZxP1L7041Fa/ZkDn+MKvmsWd0oP7wCjQPjX3LUu6fUrlyKdY1hS60cQcMV53nvC3g==
+
+redux-thunk-recursion-detect@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/redux-thunk-recursion-detect/-/redux-thunk-recursion-detect-1.1.3.tgz#68193fd1f09ca9164627215831de5a751e20da78"
+  integrity sha512-MJqywhLsvK75Gtq7APIc+iH3Z4giCXZAW30nmBr5mmWjgT4fsjPZdhMHh3iGXXfW2YcgvFaZ2/LKwZh82o+xGw==
+
 redux@^4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.3.tgz#0ca18be085e6cf6ed50e445a125f85e8b26b266b"
@@ -8689,6 +8742,13 @@ socket.io-parser@~3.3.0:
     component-emitter "1.2.1"
     debug "~3.1.0"
     isarray "2.0.1"
+
+socket.io-promise@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/socket.io-promise/-/socket.io-promise-1.1.1.tgz#a6732e386f8b81a7a99f41a2224fa1f6c81802c3"
+  integrity sha512-miPuiW6S3Z5fCWCUBvNbKCfU9tcH+BxejdptVS2gJ3Dwcy09ZIy4PCmpUYw61xHiwcdVhCwjtSHtY+An0MtyUQ==
+  dependencies:
+    es6-error "^4.1.1"
 
 socket.io@^2.2.0:
   version "2.2.0"
@@ -9471,6 +9531,14 @@ url-loader@1.1.2:
     mime "^2.0.3"
     schema-utils "^1.0.0"
 
+url-mapper@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/url-mapper/-/url-mapper-2.0.0.tgz#bf88f791f184d2ccd62124f1e72e0fe98bf0c866"
+  integrity sha1-v4j3kfGE0szWISTx5y4P6YvwyGY=
+  dependencies:
+    path-to-regexp "^2.1.0"
+    urlon "^3.0.1"
+
 url-parse@^1.4.3:
   version "1.4.7"
   resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.7.tgz#a8a83535e8c00a316e403a5db4ac1b9b853ae278"
@@ -9485,6 +9553,11 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+urlon@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/urlon/-/urlon-3.0.1.tgz#f1b38d004ad8a6c62403677a329dd31dafb622dd"
+  integrity sha512-G3njKjdNzJwBoV+i2sezurLCu9RchRJVMn21rtI7D8cCXmI9sXEhfTBkP35HQDknQLTJFYCHepe3tOsHvZTgZA==
 
 use@^3.1.0:
   version "3.1.0"
