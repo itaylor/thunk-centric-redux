@@ -24,7 +24,7 @@ describe('createPostMessageMiddleware', () => {
     store.dispatch({ type: 'sendPostMessageAction'});
     expect(postMessageSpy).toHaveBeenCalledWith({ "type": "sendPostMessageAction"}, "mockOrigin");
   });
-  test('calls postMessage if action is a valid postMessage type', async () => {
+  test('doesnt call postMessage if action is not a valid postMessage type', async () => {
     const postMessageSpy = jest.fn();
     const windowSelector = makeWindowSelector(postMessageSpy);
     const sendPostMessageMiddleware = createSendPostMessageMiddleware(windowSelector, actionsMap);
