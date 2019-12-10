@@ -44,7 +44,3 @@ function simpleReducer(state = {
   }
   return state;
 }
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
