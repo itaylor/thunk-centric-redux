@@ -1,11 +1,10 @@
 import { Action, Middleware, AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk-recursion-detect';
 
-type PostMessageWindowType = {
+export type PostMessageWindowType = {
   targetWindow: Window,
   targetWindowOrigin: string,
 }
-
 
 declare function createPostMessageDispatcherMiddleware<
   TState = {},
