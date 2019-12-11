@@ -2,15 +2,13 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createSendPostMessageMiddleware } from './sendPostMessageMiddleware.js';
 
-const makeWindowSelector = (spy) => () => {
-  return {
-    targetWindow: {
-      postMessage: spy,
-    },
-    targetWindowOrigin: 'mockOrigin'
-  }
-}
-const actionsMap = new Set(['sendPostMessageAction']);
+const makeWindowSelector = spy => () => ({
+  targetWindow: {
+    postMessage: spy,
+  },
+  targetWindowOrigin: 'mockOrigin',
+});
+const actionsMap = ['sendPostMessageAction'];
 
 
 describe('createPostMessageMiddleware', () => {
@@ -20,9 +18,9 @@ describe('createPostMessageMiddleware', () => {
     const sendPostMessageMiddleware = createSendPostMessageMiddleware(windowSelector, actionsMap);
     const createStoreWithMiddleware = applyMiddleware(sendPostMessageMiddleware, thunkMiddleware)(createStore);
     const store = createStoreWithMiddleware(simpleReducer);
-    
-    store.dispatch({ type: 'sendPostMessageAction'});
-    expect(postMessageSpy).toHaveBeenCalledWith({ "type": "sendPostMessageAction"}, "mockOrigin");
+
+    store.dispatch({ type: 'sendPostMessageAction' });
+    expect(postMessageSpy).toHaveBeenCalledWith({ type: 'sendPostMessageAction' }, 'mockOrigin');
   });
   test('doesnt call postMessage if action is not a valid postMessage type', async () => {
     const postMessageSpy = jest.fn();
@@ -30,8 +28,8 @@ describe('createPostMessageMiddleware', () => {
     const sendPostMessageMiddleware = createSendPostMessageMiddleware(windowSelector, actionsMap);
     const createStoreWithMiddleware = applyMiddleware(sendPostMessageMiddleware, thunkMiddleware)(createStore);
     const store = createStoreWithMiddleware(simpleReducer);
-    
-    store.dispatch({ type: 'dontSendPostMessageAction'});
+
+    store.dispatch({ type: 'dontSendPostMessageAction' });
     expect(postMessageSpy).not.toHaveBeenCalled();
   });
 });
