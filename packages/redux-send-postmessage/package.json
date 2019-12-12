@@ -1,0 +1,31 @@
+{
+  "name": "redux-send-postmessage",
+  "version": "1.0.0",
+  "description": "A redux middleware that allows its consumer to conditionally dispatch messages to window.postMessage",
+  "main": "dist/sendPostMessageMiddleware.cjs.js",
+  "module": "dist/sendPostMessageMiddleware.esm.js",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "NODE_ENV=test node node_modules/.bin/jest",
+    "build": "rollup -c && tsc --emitDeclarationOnly",
+    "pretest": "yarn run build"
+  },
+  "keywords": [
+    "redux",
+    "middleware",
+    "postMessage"
+  ],
+  "author": "ian.b.taylor@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "redux-thunk-recursion-detect": "^1.1.1",
+    "rollup": "^1.15.3"
+  }
+}
