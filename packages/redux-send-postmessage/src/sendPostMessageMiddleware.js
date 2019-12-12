@@ -1,7 +1,7 @@
 
 export const createSendPostMessageMiddleware = (windowSelector, actionTypes) => {
   const actionTypesSet = new Set(actionTypes);
-  return ({ dispatch }) => next => (action) => {
+  return () => next => (action) => {
     if (actionTypesSet.has(action.type)) {
       const { targetWindow, targetWindowOrigin } = windowSelector();
       if (targetWindow) {
