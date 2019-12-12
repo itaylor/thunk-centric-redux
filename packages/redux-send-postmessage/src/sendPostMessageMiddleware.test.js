@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import { createSendPostMessageMiddleware } from './sendPostMessageMiddleware.js';
+import createSendPostMessageMiddleware from './sendPostMessageMiddleware.js';
 
 const makeWindowSelector = spy => () => ({
   targetWindow: {

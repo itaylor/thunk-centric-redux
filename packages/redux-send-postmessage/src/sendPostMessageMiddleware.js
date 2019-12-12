@@ -1,5 +1,5 @@
 
-export const createSendPostMessageMiddleware = (windowSelector, actionTypes) => {
+export default function createSendPostMessageMiddleware(windowSelector, actionTypes) {
   const actionTypesSet = new Set(actionTypes);
   return () => next => (action) => {
     if (actionTypesSet.has(action.type)) {
@@ -10,4 +10,4 @@ export const createSendPostMessageMiddleware = (windowSelector, actionTypes) => 
     }
     return next(action);
   };
-};
+}
