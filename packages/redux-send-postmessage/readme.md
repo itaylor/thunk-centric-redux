@@ -3,7 +3,7 @@ A redux middleware that allows the consumer to conditionally dispatch messages t
 
 
 ## How it works
-This library allows you to create a middleware that dispatches actions to other windows via window.postMessage for configured action types. CreateSendPostMessageMiddleware receives a selector function for the window you are targeting along with a list of action types and returns a middleware function to be passed in to your redux store that will target the provided window when the type of dispatched action is included in the provided list.
+This library allows you to create a middleware that dispatches actions to other windows via window.postMessage for configured action types. `createSendPostMessageMiddleware` receives a selector function for the window you are targeting along with a list of action types and returns a middleware function to be passed in to your redux store that will target the provided window when the type of dispatched action is included in the provided list.
 
 
 ## Usage
@@ -19,10 +19,6 @@ import createSendPostMessageMiddleware from 'redux-send-postmessage';
 import myReducerFn from 'wherever/myReducer.js';
 import actionsMap from 'wherever/actionsMap.js';
 
-```
-createSendPostMessageMiddleware takes in a selector function that returns the window and origin to target and an array of approved action types on which to dispatch window.postMessage
-
-```js
 function windowSelector() {
   return {
     targetWindow: someTargetWindow,
