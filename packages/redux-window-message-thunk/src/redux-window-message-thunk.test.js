@@ -42,6 +42,14 @@ describe('redux-window-message-thunk', () => {
       expect(typeMock).toBeCalledTimes(0);
       expect(consoleMock.warn).toBeCalledTimes(1);
     });
+    it('should not fire callback if origin is only a partial domain match', async () => {
+      const typeMock = jest.fn();
+      const dispatchMock = jest.fn();
+      await messageListener(['orig'], { type: typeMock }, dispatchMock, simpleMessage);
+      expect(dispatchMock).toBeCalledTimes(0);
+      expect(typeMock).toBeCalledTimes(0);
+      expect(consoleMock.warn).toBeCalledTimes(1);
+    });
     it('should not fire any callbacks if nothing is setup correctly', async () => {
       const typeMock = jest.fn();
       const dispatchMock = jest.fn();

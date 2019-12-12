@@ -8,7 +8,7 @@ export const messageListener = async (domains: string[], messageHandlers: Messag
   const { data, origin } = message;
   const { type, payload } = data;
   const messageCallback = messageHandlers[type];
-  const isValidOrigin = domains.some(domain => origin.includes(domain));
+  const isValidOrigin = domains.some(domain => origin === domain);
   if (messageCallback && isValidOrigin) {
     await dispatch(messageCallback(payload));
   } else if (messageCallback && !isValidOrigin) {
