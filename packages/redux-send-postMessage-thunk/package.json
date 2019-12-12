@@ -1,5 +1,5 @@
 {
-  "name": "reduxSendPostMessageMiddleware",
+  "name": "redux-send-postmessage-middleware",
   "version": "1.0.0",
   "description": "A redux middleware that allows consumer to conditionally dispatch messages to window.postMessage",
   "main": "dist/sendPostMessageMiddleware.cjs.js",
@@ -15,8 +15,8 @@
     "pretest": "yarn run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ian.b.taylor@gmail.com",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
