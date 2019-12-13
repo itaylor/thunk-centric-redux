@@ -14,13 +14,10 @@ describe('redux-window-message-thunk', () => {
   beforeEach(() => {
     consoleMock.warn.mockReset();
     simpleMessage = {
-      type: 'message',
       origin: 'origin',
       data: {
         type: 'type',
-        payload: {
-          data: true,
-        },
+        text: 'some action data',
       },
     };
   });
@@ -31,7 +28,7 @@ describe('redux-window-message-thunk', () => {
       await messageListener(['origin'], { type: typeMock }, dispatchMock, simpleMessage);
       expect(dispatchMock).toBeCalledTimes(1);
       expect(typeMock).toBeCalledTimes(1);
-      expect(typeMock.mock.calls[0][0]).toEqual(simpleMessage.data.payload);
+      expect(typeMock.mock.calls[0][0]).toEqual(simpleMessage.data);
       expect(consoleMock.warn).toBeCalledTimes(0);
     });
     it('should not fire callback if origin is not valid', async () => {
@@ -75,7 +72,7 @@ describe('redux-window-message-thunk', () => {
       await new Promise(resolve => setTimeout(resolve, 0));
       expect(dispatchMock).toBeCalledTimes(1);
       expect(typeMock).toBeCalledTimes(1);
-      expect(typeMock.mock.calls[0][0]).toEqual(simpleMessage.data.payload);
+      expect(typeMock.mock.calls[0][0]).toEqual(simpleMessage.data);
       expect(consoleMock.warn).toBeCalledTimes(0);
     });
     it('should not call our listener on an event type that does not exist', async () => {
