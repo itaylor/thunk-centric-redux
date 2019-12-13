@@ -2,8 +2,12 @@
 
 A middleware that allows you to setup event handlers for window 'message' events.
 
-## Philosophy
-We like thunks and want to use them wherever possible.  We should be able to handle all errors that occur inside of executing thunks, both sync and async in a centralized place.  When we handle an error, the error handling function is just an action creator that may itself return another thunk.
+## How it works
+This library allows for the creation of window.postMessage listeners associated with
+a set of callback functions and the dispatch the callback result through redux middleware. 
+These callbacks are associated to the respective listener by matching the callback 
+function name with the `type` property of the message data received, and are only dispatched
+if the origin matches a trusted domain from the domains array passed to the middleware.
 
 ## Usage
 
@@ -20,10 +24,10 @@ import myReducerFn from './myReducer.js';
 
 const messageCallbacks = {
   'MODAL_CLOSE': (data) => {
-    const {someKey} = data
+    const { someKey } = data
     return {
       type: 'HANDLE_MODAL_IN_PARENT',
-      payload: {someKey}
+      key: someKey
     }
   }
 }
@@ -38,20 +42,38 @@ const store = createStore(
 );
 ```
 
+### Message callback thunk
+
+A message callback should either be mapped an action as shown above or a thunk.
+
+```js
+const messageCallbacks = {
+  'MODAL_CLOSE': (data) => {
+    return (dispatch, getState) => {
+      const { someKey } = data;
+      if (getState().allowedKey === someKey) {
+        dispatch({
+          type: 'HANDLE_MODAL_IN_PARENT',
+          key: someKey
+        })
+      }
+    }
+  }
+}
+```
+
 ### What's Happening
 
-This will begin listening to _all_ window message events. If an event comaes along with a payload of the shape:
+This will begin listening to _all_ window message events. If an event comes along with a payload of the shape:
 
 ```js
 data: {
   type: 'MODAL_CLOSE',
-  payload: {
-    someKey: true,
-  },
+  someKey: true,
 },
 ```
 
-It will looks for a method on your `messageCallbacks` map, and if it finds it will pass your playload to it and dispatch the result.
+It will look for a method on your `messageCallbacks` map, and if it finds it will pass your data to it and dispatch the result.
 
 
 ## A part of the [thunk-centric-redux](//github.com/itaylor/thunk-centric-redux) set of tools
