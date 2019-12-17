@@ -1,6 +1,6 @@
 {
   "name": "redux-window-message-thunk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A redux middleware for listening to window message events",
   "author": "Harris Weeks <root@hweeks.com>",
   "homepage": "https://github.com/itaylor/thunk-centric-redux#readme",

@@ -1,6 +1,6 @@
 {
   "name": "redux-awaitable-thunk",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A redux middleware that allows you to await completion of other in-progress thunks, allowing for complex flow control within thunks.",
   "main": "dist/awaitableThunkMiddleware.cjs.js",
   "module": "dist/awaitableThunkMiddleware.esm.js",
