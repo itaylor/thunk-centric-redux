@@ -1,0 +1,40 @@
+{
+  "name": "redux-buffer-actions",
+  "version": "1.0.0-rc.1",
+  "description": "A redux middleware that allows for configurable buffering and releasing of actions by type",
+  "main": "dist/bufferActionsMiddleware.cjs.js",
+  "module": "dist/bufferActionsMiddleware.esm.js",
+  "repository": "github:itaylor/thunk-centric-redux",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "node node_modules/.bin/rollup -c",
+    "dev": "node node_modules/.bin/rollup -c -w",
+    "test": "node node_modules/.bin/jest",
+    "pretest": "yarn run build",
+    "coverage": "node node_modules/.bin/jest --coverage",
+    "precoverage": "yarn run build"
+  },
+  "keywords": [
+    "redux",
+    "middleware",
+    "buffer",
+    "actions"
+  ],
+  "author": "ian.b.taylor@gmail.com",
+  "license": "MIT",
+  "peerDependencies": {
+    "redux": "^4.0.1",
+    "redux-thunk-recursion-detect": "^1.1.1"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "redux-thunk-recursion-detect": "^1.1.4",
+    "rollup": "^1.15.3"
+  }
+}
