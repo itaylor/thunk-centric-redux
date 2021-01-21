@@ -16,7 +16,7 @@
     "redux-socket.io-message-thunk": "^1.1.2",
     "redux-thunk-error-handler": "^1.1.3",
     "redux-thunk-recursion-detect": "^1.1.3",
-    "socket.io": "^2.2.0",
+    "socket.io": "^2.4.0",
     "socket.io-promise": "^1.1.1"
   },
   "scripts": {
