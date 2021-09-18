@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ioPromise ioPromise rejects on response with type that is different from request 1`] = `
-[IoPromiseError: Socket.io response error.  Expected type 'sendSomeData' but got 'someErrorType'
-response: {"type":"someErrorType","payload":"this is an error"}
-request: {"type":"sendSomeData","payload":"junk"}]
-`;
-
-exports[`ioPromise ioPromise throws on missing response 1`] = `[Error: Missing response for request: {"type":"sendSomeData","payload":"junk"}]`;
